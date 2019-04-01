@@ -66,7 +66,7 @@ Taylor: communicative of pull requests content
 
 Mason: more meticulous branching
 
-Edgar: micro-commits, issues, (checkpoints), show team how to use vscode
+Edgar: micro-commits, issues, (checkpoints), show team how to use vscode for commits
 
 #### Expectations for giving and receiving feedback:
 
