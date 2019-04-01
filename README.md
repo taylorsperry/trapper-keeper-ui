@@ -10,7 +10,7 @@ Template for DTR Memo
 
 -Mason: Feel good about finished product, all facets touched on
 
--Edgar: Have completed project w/at least 50 tests passing. I want to everyone learn at something they feel weakest at.
+-Edgar: Have completed project w/at least 50 tests passing. I want to help everyone learn at something they feel weakest at.
 
 #### Team strengths & collaboration styles (consider discussing your Pairin qualities here):
 
