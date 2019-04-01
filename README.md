@@ -1,68 +1,89 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Template for DTR Memo
 
-## Available Scripts
+Project:
 
-In the project directory, you can run:
+Group Member Names: Mason France, Edgar Munoz, Taylor Sperry
 
-### `npm start`
+Goals and Expectations for the Project (What does each group member hope to get out of this project? What do we want to achieve as a team? How will we know that we're successful?):
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-Taylor: Feel more confident w/testing. Be more conscientious about TDD. Learn Thunks.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+-Mason: Feel good about finished product, all facets touched on
 
-### `npm test`
+-Edgar: Have completed project w/at least 50 tests passing. I want to everyone learn at something they feel weakest at.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Team strengths & collaboration styles (consider discussing your Pairin qualities here):
 
-### `npm run build`
+-Taylor: Can f**king crank, Start w/d+n and then phasing into delegation
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-Mason: Strategic thinker, good ideas, likes focused tasks. Consensus based.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+-Edgar: Focused research, Flexible
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+How we can use our strengths to overcome obstacles:
 
-### `npm run eject`
+Taylor: Staying focused
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Mason: Github issues
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Edgar: Redux/React console
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Schedule Expectations (When are we available to work together and individually? What constraints do we have?):
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Taylor: Open
 
-## Learn More
+Mason: Rehearsals Sunday nights
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Edgar: Available
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Communication Expectations (How and often will we communicate? How do we keep lines of communication open? How will we make decisions as a team?):
 
-### Code Splitting
+Taylor: Slack, Use communication for team-based problem-solving
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Mason: Slack Call/Screen Share?, will try to reach out more
 
-### Analyzing the Bundle Size
+Edgar: Available on slack, other mediums on ask
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Abilities & Growth Expectations (Technical strengths and areas for desired improvement):
 
-### Making a Progressive Web App
+Taylor: Testing, Thunks, Demystify Backend
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Mason: Thunks, 
 
-### Advanced Configuration
+Edgar: Streamline implementation of a React/Redux/Router/Testing project w/Thunks
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Workload Expectations (What features do we each want to work on?):
 
-### Deployment
+Taylor: Everyone has a hand in each part
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Mason: Delegation/Cooperation through intentional planning + consistency
 
-### `npm run build` fails to minify
+Edgar: Expect to work a lot. Doesn’t want to fizzle out towards tail-end. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Workflow Expectations (Git workflow/Tools/Code Review/Reviewing Pull Requests/Debugging and Problem-solving Techniques):
+
+Taylor: communicative of pull requests content
+
+Mason: more meticulous branching
+
+Edgar: micro-commits, issues, (checkpoints), show team how to use vscode
+
+Expectations for giving and receiving feedback:
+
+Taylor: nicely tell her she’s being grouchy
+
+Mason: supportive, gentle nudging
+
+Edgar: not personal(for me)
+
+Project management tools we will use:
+
+Issues, checkpoints, google doc/trello for tracking and planning
+
+Day 1 Agenda: 
+
+Edgar: Research, prep
+
+Taylor: Initial setup, some pseudo coding
+
+Additional Notes: Don’t push to master (unless all are present), pair w/mod 4, ask classmates for help
