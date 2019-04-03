@@ -1,5 +1,5 @@
 import React from 'react';
-import NoteForm from './NoteForm';
+import {NoteForm} from './NoteForm';
 import {shallow} from 'enzyme';
 import {addNote} from '../../helpers/apiCalls';
 
@@ -68,8 +68,18 @@ describe('NoteForm', () => {
       expect(addNote).toHaveBeenCalledWith(expected)
     })
 
-    it('should update the store with a new note', () => {
-      
-    })
+    // it('should update the store with a new note', async () => {
+    //   const props = {
+    //     storeNote: jest.fn()
+    //   }
+
+    //   const mockEvent = {
+    //     preventDefault: jest.fn()
+    //   }
+
+    //   await wrapper.instance().sendNote(mockEvent)
+
+    //   expect(props.storeNote).toHaveBeenCalled()
+    // })
   })
 })
