@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import {addNote} from '../../helpers/apiCalls'
+import { addNote } from '../../helpers/apiCalls'
+import { connect } from 'react-redux'
+import { storeNote } from '../../actions'
 
 export class NoteForm extends Component {
   constructor(props) {
@@ -20,11 +22,11 @@ handleBlur = () => {
   this.setState( {items: [...this.state.items, currItem], item: ''} )
 }
 
-sendNote = (e) => {
+sendNote = async (e) => {
   e.preventDefault()
   const { title, items} = this.state
-  const newNote = addNote({title, items})
-  //call action dispatch to store
+  const newNote = await addNote({title, items})
+  this.props.storeNote(newNote)
 }
 
 render() {
@@ -50,4 +52,8 @@ render() {
   }
 }
 
-export default NoteForm;
+export const mapDispatchToProps = (dispatch) => ({
+  storeNote: (note) => dispatch(storeNote(note))
+})
+
+export default connect(null, mapDispatchToProps)(NoteForm);

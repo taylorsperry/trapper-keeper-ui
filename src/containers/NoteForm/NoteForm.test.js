@@ -67,5 +67,9 @@ describe('NoteForm', () => {
 
       expect(addNote).toHaveBeenCalledWith(expected)
     })
+
+    it('should update the store with a new note', () => {
+      
+    })
   })
 })
