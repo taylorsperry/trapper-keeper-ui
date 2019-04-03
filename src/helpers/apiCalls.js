@@ -1,4 +1,6 @@
-export const addNote = async (url, note) => {
+export const addNote = async (note) => {
+  const url = 'http://localhost:3001/api/v1/notes'
+  console.log(note)
   try {
     const response = await fetch(url, {
       method: 'POST',

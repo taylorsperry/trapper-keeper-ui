@@ -12,7 +12,7 @@ export class NoteForm extends Component {
   }
 
 handleChange = (e) => {
-  this.setState({[e.target.name]: [e.target.value]})
+  this.setState({[e.target.name]: e.target.value})
 }
 
 handleBlur = (e) => {
@@ -20,8 +20,11 @@ handleBlur = (e) => {
   this.setState( {items: [...this.state.items, currItem], item: ''} )
 }
 
-sendNote = () => {
-  const newNote = addNote(this.state)
+sendNote = (e) => {
+  e.preventDefault()
+  const { title, items} = this.state
+  const newNote = addNote({title, items})
+  //call action dispatch to store
 }
 
 render() {
