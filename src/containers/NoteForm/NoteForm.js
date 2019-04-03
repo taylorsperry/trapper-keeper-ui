@@ -15,7 +15,7 @@ handleChange = (e) => {
   this.setState({[e.target.name]: e.target.value})
 }
 
-handleBlur = (e) => {
+handleBlur = () => {
   let currItem = this.state.item
   this.setState( {items: [...this.state.items, currItem], item: ''} )
 }
