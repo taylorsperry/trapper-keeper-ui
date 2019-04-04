@@ -2,10 +2,6 @@ import {addNote} from './apiCalls'
 import {mockNote, mockErrorNote} from './mockData'
 
 describe('addNote', () => {
-  
-  beforeEach(() => {
-    
-  })
 
   it('should call fetch and return the added note', async () => {
     window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
