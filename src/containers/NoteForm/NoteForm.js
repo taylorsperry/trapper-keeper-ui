@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { addNote } from '../../helpers/apiCalls'
 import { connect } from 'react-redux'
 import { storeNote } from '../../actions'
+import Item from '../../components/Item/Item'
 
 export class NoteForm extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ handleChange = (e) => {
 }
 
 handleBlur = () => {
-  let currItem = this.state.item
+  let currItem = { id: Date.now(), value: this.state.item }
   this.setState( {items: [...this.state.items, currItem], item: ''} )
 }
 
@@ -29,8 +30,38 @@ sendNote = async (e) => {
   this.props.storeNote(newNote)
 }
 
+updateItem = (id, value) => {
+  if(value) {
+    let items = this.state.items;
+    let index = items.findIndex(item => item.id === id)
+    items.splice(index, 1, {id, value})
+    this.setState({
+      items: items
+    })
+  }
+}
+
 render() {
-  //for each input, on focus, create a new input
+  if (this.state.item || this.state.items.length === 0) {
+    let input = <input 
+      className='item' 
+      onChange={this.handleChange}
+      onBlur={this.handleBlur}
+      value={this.state.item}
+      name="item"
+    >
+    </input>
+    this.setState({
+      items: [...this.state.items, input]
+    })
+  }
+
+  let items = this.state.items.map(item => 
+    <Item key={item.id} id={item.id} value={item.value} updateItem={this.updateItem}/>
+    )
+  
+  
+
   return (
     <form onSubmit={this.sendNote}>
       <input className='title' 
@@ -39,13 +70,14 @@ render() {
              name="title"
              >
       </input>
-      <input className='item' 
+      {items}
+      {/* <input className='item' 
              onChange={this.handleChange}
              onBlur={this.handleBlur}
              value={this.state.item}
              name="item"
              >
-      </input>
+      </input> */}
       <button>Save</button>
     </form>
   )
