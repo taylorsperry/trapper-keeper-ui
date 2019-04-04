@@ -14,3 +14,14 @@ export const addNote = async (note) => {
     return error.message
   }
 }
+
+export const getNotes = async () => {
+  const url = 'http://localhost:3001/api/v1/notes'
+  try {
+    const response = await fetch(url);
+    const allNotes = await response.json();
+    return allNotes.notes
+  } catch (error) {
+    return error.message
+  }
+}
