@@ -3,19 +3,16 @@ import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import NoteContainer from '../../components/NoteContainer/NoteContainer';
 import NoteForm from '../NoteForm/NoteForm';
-import { storeNote } from '../../actions';
+import { storeSavedNotes } from '../../actions';
 import { getNotes } from '../../helpers/apiCalls';
-import './App.css';
+import './App.scss';
 
 export class App extends Component {
-
-
-  componentDidMount = async (notes) => {
-    if (!notes) {
+  
+  componentDidMount = async () => {
+    if (!this.props.notes.length) {
       const allNotes = await getNotes();
-      await allNotes.forEach(note => {
-        this.props.storeNote(note)
-      })
+      this.props.storeSavedNotes(allNotes)
     }
   }
   
@@ -25,8 +22,7 @@ export class App extends Component {
         <header className="App-header">
           Trapper Keeper
         </header>
-        {/* <NoteContainer notes={this.state.notes}/> */}
-        <Route path='/' component={ NoteContainer } />
+        <Route path='/' component= { () => <NoteContainer notes={this.props.notes} /> } />
         <Route path='/new-note' component={ NoteForm } />
       </div>
     );
@@ -38,7 +34,7 @@ export const mapStateToProps = (state) => ({
 })
 
 export const mapDispatchToProps = (dispatch) => ({
-  storeNote: (note) => dispatch(storeNote(note))
+  storeSavedNotes: (notes) => dispatch(storeSavedNotes(notes))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
