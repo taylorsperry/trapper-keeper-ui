@@ -4,7 +4,8 @@ export class Item extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.value
+      value: '',
+      id: Date.now(),
     }
   }
 
@@ -12,27 +13,21 @@ export class Item extends Component {
     this.setState({
       value: e.target.value
     })
-    // this.props.handleChange(e)
+    this.props.handleChange(e)
   }
 
   handleItemBlur = (e) => {
-    let { id } = this.props;
-    if(this.state.value) {
-    let currItem = {id, value: this.state.value}
-    this.setState({
-      value: ''
-    }, () => this.props.handleItem(currItem))
-  }
+    let { id, value } = this.state;
+    let currItem = {id, value}
+    this.props.handleItem(currItem)
   }
 
   render() {
-  // let { value } = this.props;
-
   return (
-    <textarea defaultValue={this.state.value} 
+    <textarea value={this.state.value}
               onChange={this.handleItemChange} 
               onBlur={this.handleItemBlur}
-              name='item'
+              name='listText'
             >
     </textarea>
   )

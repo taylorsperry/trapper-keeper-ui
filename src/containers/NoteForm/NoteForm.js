@@ -9,8 +9,9 @@ export class NoteForm extends Component {
     super(props);
     this.state = {
       title: '',
-      item: '',
+      listText: '',
       items: [],
+      inputs: 0,
     }
   }
 
@@ -18,17 +19,16 @@ handleChange = (e) => {
   this.setState({[e.target.name]: e.target.value})
 }
 
-// handleBlur = (currItem) => {
-//   // let currItem = { id: Date.now(), value: this.state.item }
-//   this.setState( {items: [...this.state.items, currItem], item: ''} )
-// }
+handleBlur = () => {
+  this.setState( {items: [...this.state.items, this.state.listText], listText: ''} )
+}
 
-// sendNote = async (e) => {
-//   e.preventDefault()
-//   const { title, items} = this.state
-//   const newNote = await addNote({title, items})
-//   this.props.storeNote(newNote)
-// }
+sendNote = async (e) => {
+  e.preventDefault()
+  const { title, items} = this.state
+  const newNote = await addNote({title, items})
+  this.props.storeNote(newNote)
+}
 
 handleItem = (currItem) => {
   let found = false;
@@ -40,9 +40,11 @@ handleItem = (currItem) => {
     return item
   })
   if (!found) {
-    
+    let count = this.state.inputs
+    count++
     this.setState({
-      items: [...this.state.items, currItem]
+      items: [...this.state.items, currItem],
+      inputs: count
     })
   } else {
     this.setState({
@@ -52,19 +54,11 @@ handleItem = (currItem) => {
 }
 
 render() {
-  // if (this.state.items.length === 0) {
-  //   let input = <Item value={''} />
-  //   this.setState({
-  //     items: [...this.state.items, input]
-  //   })
-  // }
+  let inputs = []
 
-let input = <Item />
-  let addInput = [...this.state.items, input]
-
-  let items = addInput.map(item => 
-    <Item key={item.id} id={item.id} value={item.value} handleItem={this.handleItem} handleChange={this.handleChange} />
-    )
+   for (let i = 0; i <= this.state.inputs; i++) {
+    inputs.push(<Item handleItem={this.handleItem} handleChange={this.handleChange} />)
+  }
 
   return (
     <form onSubmit={this.sendNote}>
@@ -74,14 +68,14 @@ let input = <Item />
              name="title"
              >
       </input>
-      {items}
-      {/* <input className='item' 
+      {/* <input className='listText' 
              onChange={this.handleChange}
              onBlur={this.handleBlur}
-             value={this.state.item}
-             name="item"
+             value={this.state.listText}
+             name="listText"
              >
       </input> */}
+      {inputs}
       <button>Save</button>
     </form>
   )
