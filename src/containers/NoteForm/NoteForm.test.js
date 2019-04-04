@@ -1,7 +1,9 @@
 import React from 'react';
-import {NoteForm} from './NoteForm';
+import {NoteForm, mapDispatchToProps} from './NoteForm';
 import {shallow} from 'enzyme';
 import {addNote} from '../../helpers/apiCalls';
+import { storeNote } from '../../actions';
+import mockNote from '../../helpers/mockData';
 
 jest.mock('../../helpers/apiCalls');
 
@@ -81,5 +83,15 @@ describe('NoteForm', () => {
 
     //   expect(props.storeNote).toHaveBeenCalled()
     // })
+  })
+
+  describe('mapDispatchToProps', () => {
+    const mockDispatch = jest.fn()
+    const actionToDispatch = storeNote(mockNote)
+
+    const mappedProps = mapDispatchToProps(mockDispatch)
+    mappedProps.storeNote(mockNote)
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
   })
 })
