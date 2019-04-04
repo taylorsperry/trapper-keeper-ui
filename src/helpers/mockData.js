@@ -1,6 +1,15 @@
 export const mockNote = {
-  id: 'oka3i',
+  id: 2,
   title: 'mockTitle',
+  items: [
+    'first',
+    'second',
+    'third'
+  ]
+}
+
+export const mockErrorNote = {
+  title: '',
   items: [
     'first',
     'second',

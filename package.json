@@ -31,5 +31,18 @@
   "devDependencies": {
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/containers/App/App.js",
+      "src/containers/Note/Note.js",
+      "src/containers/NoteForm/NoteForm.js",
+      "src/components/NoteContainer/NoteContainer.js",
+      "src/helpers/apiCalls.js",
+      "src/reducers/index.js",
+      "src/reducers/notes.js",
+      "src/helpers/mockData.js",
+      "src/actions/index.js"
+    ]
   }
 }
