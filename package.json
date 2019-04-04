@@ -37,7 +37,7 @@
       "src/containers/App/App.js",
       "src/containers/Note/Note.js",
       "src/containers/NoteForm/NoteForm.js",
-      "src/containers/NoteContainer/NoteContainer.js",
+      "src/components/NoteContainer/NoteContainer.js",
       "src/helpers/apiCalls.js",
       "src/reducers/index.js",
       "src/reducers/notes.js",
