@@ -18,49 +18,53 @@ handleChange = (e) => {
   this.setState({[e.target.name]: e.target.value})
 }
 
-handleBlur = () => {
-  let currItem = { id: Date.now(), value: this.state.item }
-  this.setState( {items: [...this.state.items, currItem], item: ''} )
-}
+// handleBlur = (currItem) => {
+//   // let currItem = { id: Date.now(), value: this.state.item }
+//   this.setState( {items: [...this.state.items, currItem], item: ''} )
+// }
 
-sendNote = async (e) => {
-  e.preventDefault()
-  const { title, items} = this.state
-  const newNote = await addNote({title, items})
-  this.props.storeNote(newNote)
-}
+// sendNote = async (e) => {
+//   e.preventDefault()
+//   const { title, items} = this.state
+//   const newNote = await addNote({title, items})
+//   this.props.storeNote(newNote)
+// }
 
-updateItem = (id, value) => {
-  if(value) {
-    let items = this.state.items;
-    let index = items.findIndex(item => item.id === id)
-    items.splice(index, 1, {id, value})
+handleItem = (currItem) => {
+  let found = false;
+  let updatedItems = this.state.items.map(item => {
+    if(item.id === currItem.id) {
+      found = true;
+      item = currItem;
+    } 
+    return item
+  })
+  if (!found) {
+    
     this.setState({
-      items: items
+      items: [...this.state.items, currItem]
+    })
+  } else {
+    this.setState({
+      items: updatedItems
     })
   }
 }
 
 render() {
-  if (this.state.item || this.state.items.length === 0) {
-    let input = <input 
-      className='item' 
-      onChange={this.handleChange}
-      onBlur={this.handleBlur}
-      value={this.state.item}
-      name="item"
-    >
-    </input>
-    this.setState({
-      items: [...this.state.items, input]
-    })
-  }
+  // if (this.state.items.length === 0) {
+  //   let input = <Item value={''} />
+  //   this.setState({
+  //     items: [...this.state.items, input]
+  //   })
+  // }
 
-  let items = this.state.items.map(item => 
-    <Item key={item.id} id={item.id} value={item.value} updateItem={this.updateItem}/>
+let input = <Item />
+  let addInput = [...this.state.items, input]
+
+  let items = addInput.map(item => 
+    <Item key={item.id} id={item.id} value={item.value} handleItem={this.handleItem} handleChange={this.handleChange} />
     )
-  
-  
 
   return (
     <form onSubmit={this.sendNote}>
