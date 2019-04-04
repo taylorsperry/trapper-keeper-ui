@@ -7,3 +7,17 @@ export const storeSavedNotes = (notes) => ({
   type: 'STORE_SAVED_NOTES',
   notes
 })
+
+export const deleteNote = (id) => ({
+  type: 'DELETE_NOTE',
+  id
+})
+
+// export const isLoading = () => ({
+//   type: 'IS_LOADING',
+// })
+
+
+// export const hasError = () => ({
+//   type: 'HAS_ERROR',
+// })

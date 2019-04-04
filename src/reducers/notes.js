@@ -3,8 +3,10 @@ export const notes = (state = [], action) => {
     case 'STORE_NOTE':
       return [...state, action.note]
     case 'STORE_SAVED_NOTES':
-      return action.notes
-      default:
+      return action.notes;
+    case 'DELETE_NOTE':
+      return state.filter(note => note.id !== action.id);
+    default:
       return state;
     }
 }
