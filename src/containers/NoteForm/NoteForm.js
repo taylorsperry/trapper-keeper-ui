@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import { addNote } from '../../helpers/apiCalls'
 import { connect } from 'react-redux'
 import { storeNote } from '../../actions'
+import Item from '../../components/Item/Item'
 
 export class NoteForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       title: '',
-      item: '',
+      listText: '',
       items: [],
+      inputs: 0,
     }
   }
 
@@ -18,8 +20,7 @@ handleChange = (e) => {
 }
 
 handleBlur = () => {
-  let currItem = this.state.item
-  this.setState( {items: [...this.state.items, currItem], item: ''} )
+  this.setState( {items: [...this.state.items, this.state.listText], listText: ''} )
 }
 
 sendNote = async (e) => {
@@ -29,8 +30,36 @@ sendNote = async (e) => {
   this.props.storeNote(newNote)
 }
 
+handleItem = (currItem) => {
+  let found = false;
+  let updatedItems = this.state.items.map(item => {
+    if(item.id === currItem.id) {
+      found = true;
+      item = currItem;
+    } 
+    return item
+  })
+  if (!found) {
+    let count = this.state.inputs
+    count++
+    this.setState({
+      items: [...this.state.items, currItem],
+      inputs: count
+    })
+  } else {
+    this.setState({
+      items: updatedItems
+    })
+  }
+}
+
 render() {
-  //for each input, on focus, create a new input
+  let inputs = []
+
+   for (let i = 0; i <= this.state.inputs; i++) {
+    inputs.push(<Item handleItem={this.handleItem} handleChange={this.handleChange} />)
+  }
+
   return (
     <form onSubmit={this.sendNote}>
       <input className='title' 
@@ -39,13 +68,14 @@ render() {
              name="title"
              >
       </input>
-      <input className='item' 
+      {/* <input className='listText' 
              onChange={this.handleChange}
              onBlur={this.handleBlur}
-             value={this.state.item}
-             name="item"
+             value={this.state.listText}
+             name="listText"
              >
-      </input>
+      </input> */}
+      {inputs}
       <button>Save</button>
     </form>
   )
