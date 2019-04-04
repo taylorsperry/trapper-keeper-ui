@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
 import NoteContainer from '../../components/NoteContainer/NoteContainer'
 import NoteForm from '../NoteForm/NoteForm'
-import './App.css';
 
 class App extends Component {
 
