@@ -1,23 +1,28 @@
 import {addNote} from './apiCalls'
-import {mockNote} from './mockData'
+import {mockNote, mockErrorNote} from './mockData'
 
 describe('addNote', () => {
-  let mockUrl;
+  
   beforeEach(() => {
-    mockUrl = 'www.mockurl.com'
+    
+  })
+
+  it('should call fetch and return the added note', async () => {
     window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
       ok: true,
       status: 200,
       json: () => Promise.resolve(mockNote)
     }))
-  })
-
-  it('should call fetch and return the added note', async () => {
-    const newNote = await addNote()
+    const newNote = await addNote(mockNote)
     expect(window.fetch).toHaveBeenCalled()
 
     expect(newNote).toEqual(mockNote)
   })
-})
 
-//testing
+  it('should return an error message note was unable to be added', async () => {
+    window.fetch = jest.fn().mockImplementation(() => Promise.reject(
+      new Error('Missing title')
+    ))
+    await expect(addNote(mockErrorNote)).resolves.toBe('Missing title')
+  })
+})
