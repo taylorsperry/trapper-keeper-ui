@@ -10,7 +10,7 @@ export class Note extends Component {
   render() {
     return(
       <form>
-        
+        <p>I'm a note!</p>
       </form>
     )
   }
