@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom'
-import NoteContainer from '../../components/NoteContainer/NoteContainer'
-import NoteForm from '../NoteForm/NoteForm'
+import { Route } from 'react-router-dom';
+import { connect } from 'react-redux'
+import NoteContainer from '../../components/NoteContainer/NoteContainer';
+import NoteForm from '../NoteForm/NoteForm';
+import { storeNote } from '../../actions';
+import { getNotes } from '../../helpers/apiCalls';
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
 
+
+  componentDidMount = async (notes) => {
+    if (!notes) {
+      const allNotes = await getNotes();
+      await allNotes.forEach(note => {
+        this.props.storeNote(note)
+      })
+    }
+  }
   
   render() {
     return (
@@ -13,6 +25,7 @@ class App extends Component {
         <header className="App-header">
           Trapper Keeper
         </header>
+        {/* <NoteContainer notes={this.state.notes}/> */}
         <Route path='/' component={ NoteContainer } />
         <Route path='/new-note' component={ NoteForm } />
       </div>
@@ -20,4 +33,12 @@ class App extends Component {
   }
 }
 
-export default App;
+export const mapStateToProps = (state) => ({
+  notes: state.notes
+})
+
+export const mapDispatchToProps = (dispatch) => ({
+  storeNote: (note) => dispatch(storeNote(note))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
