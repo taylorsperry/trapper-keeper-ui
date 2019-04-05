@@ -1,6 +1,9 @@
-@import './containers/App/App';
+@import './helpers/variables';
+@import './containers/App/_App.scss';
+@import './containers/NoteForm/NoteForm';
 
 body {
+  background: $background;
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

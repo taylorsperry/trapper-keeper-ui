@@ -5,7 +5,7 @@ import NoteContainer from '../../components/NoteContainer/NoteContainer';
 import NoteForm from '../NoteForm/NoteForm';
 import { storeSavedNotes } from '../../actions';
 import { getNotes } from '../../helpers/apiCalls';
-import './App.scss';
+import './_App.scss';
 
 export class App extends Component {
   
@@ -20,9 +20,13 @@ export class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          Trapper Keeper
+          <div className='logo'>
+            <i class="fas fa-file"></i>
+            <h1>Trapper Keeper</h1>
+          </div>
+          <button className='new-note'>New Note</button>
         </header>
-        <Route path='/' component= { () => <NoteContainer notes={this.props.notes} /> } />
+        <Route exact path='/' component= { () => <NoteContainer notes={this.props.notes} /> } />
         <Route path='/new-note' component={ NoteForm } />
       </div>
     );

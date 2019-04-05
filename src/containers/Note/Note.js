@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Item from '../../components/Item/Item'
 
 export class Note extends Component {
   constructor(props) {
@@ -8,9 +9,13 @@ export class Note extends Component {
     }
   }
   render() {
+    let { title, items } = this.props.note
+    console.log(items)
+    let existingItems = items.map(item => <Item />)
     return(
       <form>
-        <p>I'm a note!</p>
+        <p>{title}</p>
+        {existingItems}
       </form>
     )
   }

@@ -1,0 +1,92 @@
+@import '../../helpers/variables';
+
+form {
+  padding: 30px 10px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  width: 80%;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.20);
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+}
+
+.title {
+  font-size: 26px;
+  margin-bottom: 10px;
+  border: none;
+  color: #202124;
+   &:focus {
+     outline: none;
+   }
+}
+
+.list-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid #e0e0e0 1px;
+  margin-bottom: 10px;
+}
+
+.list-item {
+  height: 24px;
+  resize: none;
+  font-size: 18px;
+  width: 100%;
+  border: none;
+  color: #202124;
+  margin: 0px 10px;
+    &:focus {
+      outline: none;
+    } 
+}
+
+.list-control {
+  height: 15px;
+  width: 15px;
+  padding: 2px;
+  font-size: 7px;
+  border: solid #202124 1px;
+  border-radius: 2.5px;
+  cursor: pointer;
+}
+
+.delete-item {
+  &:hover {
+    color: #DB4437;
+    border: solid #DB4437 1px;
+  }
+}
+
+.note-controls {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save-note,
+.delete-note {
+  margin-left: 10px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+    
+}
+
+.save-note {
+  background: #4285F4;
+    &:hover {
+      background-color: #4285f4d6;
+    }
+}
+
+.delete-note {
+  background-color: #DB4437;
+    &:hover {
+      background-color: #db4437c9
+    }
+}
