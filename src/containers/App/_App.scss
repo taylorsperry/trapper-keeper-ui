@@ -1,0 +1,54 @@
+// @import '../../helpers/_variables'
+
+.App {
+  font-family: 'Roboto', sans-serif;
+}
+
+//header styling
+.App-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // border-bottom: solid green 2px;
+  box-shadow: 0 4px 6px -6px #767676;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+h1,
+i {
+  font-size: 2rem;
+}
+
+h1 {
+  color: #767676;
+  margin: 0 10px;
+}
+
+i {
+  color: #f4b70b;
+}
+
+.new-note {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  color: #767676;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #e8eaed;
+  }
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+

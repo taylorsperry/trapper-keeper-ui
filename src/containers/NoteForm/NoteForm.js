@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './_NoteForm.scss'
 import { addNote } from '../../helpers/apiCalls'
 import { connect } from 'react-redux'
 import { storeNote } from '../../actions'
@@ -40,44 +41,51 @@ handleItem = (currItem) => {
     return item
   })
   if (!found) {
-    let count = this.state.inputs
-    count++
-    this.setState({
-      items: [...this.state.items, currItem],
-      inputs: count
-    })
+    this.addItem(currItem)
   } else {
-    this.setState({
-      items: updatedItems
-    })
+    this.updateItems(updatedItems)
   }
+}
+
+addItem = (currItem) => {
+  let count = this.state.inputs
+  count++
+  this.setState({
+    items: [...this.state.items, currItem],
+    inputs: count
+  })
+}
+
+updateItems = (updatedItems) => {
+  this.setState({
+    items: updatedItems
+  })
 }
 
 render() {
   let inputs = []
 
-   for (let i = 0; i <= this.state.inputs; i++) {
+  for (let i = 0; i <= this.state.inputs; i++) {
     inputs.push(<Item handleItem={this.handleItem} handleChange={this.handleChange} />)
   }
 
   return (
-    <form onSubmit={this.sendNote}>
-      <input className='title' 
-             onChange={this.handleChange}
-             value={this.state.title}
-             name="title"
-             >
-      </input>
-      {/* <input className='listText' 
-             onChange={this.handleChange}
-             onBlur={this.handleBlur}
-             value={this.state.listText}
-             name="listText"
-             >
-      </input> */}
-      {inputs}
-      <button>Save</button>
-    </form>
+    <div className='form-container'>
+      <form onSubmit={this.sendNote}>
+        <input className='title' 
+              onChange={this.handleChange}
+              value={this.state.title}
+              name="title"
+              placeholder='Title'
+              >
+        </input>
+        {inputs}
+        <div className='note-controls'>
+          <button className='save-note'>Save Note</button>
+          <button className='delete-note'>Delete Note</button>
+        </div>
+      </form>
+    </div>
   )
   }
 }
@@ -87,3 +95,4 @@ export const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(null, mapDispatchToProps)(NoteForm);
+
