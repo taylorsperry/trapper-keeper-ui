@@ -25,3 +25,18 @@ export const getNotes = async () => {
     return error.message
   }
 }
+
+export const removeNote = async (id) => {
+  const url = `http://localhost:3001/api/v1/notes/${id}`
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      body: JSON.stringify({id: id}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  } catch(error) {
+    return error.message
+  }
+}
