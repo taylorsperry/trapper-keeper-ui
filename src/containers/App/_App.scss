@@ -1,4 +1,4 @@
-// @import '../../helpers/_variables'
+@import '../../helpers/_variables';
 
 .App {
   font-family: 'Roboto', sans-serif;
@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: space-between;
   // border-bottom: solid green 2px;
-  box-shadow: 0 4px 6px -6px #767676;
+  box-shadow: 0 4px 6px -6px $placeholder;
   padding: 10px;
   margin-bottom: 10px;
 }
@@ -26,7 +26,7 @@ i {
 }
 
 h1 {
-  color: #767676;
+  color: $placeholder;
   margin: 0 10px;
 }
 
