@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import './_NoteForm.scss'
+import './_NewNote.scss'
 import { addNote } from '../../helpers/apiCalls'
 import { connect } from 'react-redux'
 import { storeNote } from '../../actions'
-import Item from '../../components/Item/Item'
+import NewItem from '../../components/NewItem/NewItem'
 
-export class NoteForm extends Component {
+export class NewNote extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,7 +66,7 @@ render() {
   let inputs = []
 
   for (let i = 0; i <= this.state.inputs; i++) {
-    inputs.push(<Item handleItem={this.handleItem} handleChange={this.handleChange} />)
+    inputs.push(<NewItem handleItem={this.handleItem} handleChange={this.handleChange} />)
   }
 
   return (
@@ -82,7 +82,6 @@ render() {
         {inputs}
         <div className='note-controls'>
           <button className='save-note'>Save Note</button>
-          <button className='delete-note'>Delete Note</button>
         </div>
       </form>
     </div>
@@ -94,5 +93,5 @@ export const mapDispatchToProps = (dispatch) => ({
   storeNote: (note) => dispatch(storeNote(note))
 })
 
-export default connect(null, mapDispatchToProps)(NoteForm);
+export default connect(null, mapDispatchToProps)(NewNote);
 

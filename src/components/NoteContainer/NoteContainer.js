@@ -1,9 +1,9 @@
 import React from 'react';
-import Note from '../../containers/Note/Note'
+import ViewNote from '../../containers/ViewNote/ViewNote'
 
 export const NoteContainer = (props) => {
   console.log(props.notes)
-  const notes = props.notes.map(note => <Note note={note}/>)
+  const notes = props.notes.map(note => <ViewNote note={note}/>)
   return (
     <div>
       {notes}
