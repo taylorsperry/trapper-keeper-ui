@@ -8,8 +8,8 @@ export const addNote = async (note) => {
         'Content-Type': 'application/json'
       },
     })
-      const addedNote = await response.json()
-      return addedNote;
+    const addedNote = await response.json()
+    return addedNote;
   } catch (error) {
     return error.message
   }
@@ -22,6 +22,22 @@ export const getNotes = async () => {
     const allNotes = await response.json();
     return allNotes.notes
   } catch (error) {
+    return error.message
+  }
+}
+
+export const removeNote = async (id) => {
+  const url = `http://localhost:3001/api/v1/notes/${id}`
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      body: JSON.stringify(id),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+
+  } catch(error) {
     return error.message
   }
 }

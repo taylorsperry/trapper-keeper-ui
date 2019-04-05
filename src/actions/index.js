@@ -13,7 +13,7 @@ export const deleteNote = (id) => ({
   id
 })
 
-// export const isLoading = () => ({
+// export const isLoading = (bool) => ({
 //   type: 'IS_LOADING',
 // })
 
