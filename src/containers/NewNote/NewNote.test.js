@@ -1,5 +1,5 @@
 import React from 'react';
-import {NoteForm, mapDispatchToProps} from './NoteForm';
+import {NewNote, mapDispatchToProps} from './NewNote';
 import {shallow} from 'enzyme';
 import {addNote} from '../../helpers/apiCalls';
 import { storeNote } from '../../actions';
@@ -7,12 +7,12 @@ import mockNote from '../../helpers/mockData';
 
 jest.mock('../../helpers/apiCalls');
 
-describe('NoteForm', () => {
+describe('NewNote', () => {
   let wrapper;
 
   beforeEach(() => {
     wrapper = shallow(
-      <NoteForm />
+      <NewNote />
     )
   })
   //snapshot

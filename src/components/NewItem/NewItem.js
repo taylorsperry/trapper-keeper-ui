@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export class Item extends Component {
+export class NewItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,9 @@ export class Item extends Component {
   handleItemBlur = (e) => {
     let { id, value } = this.state;
     let currItem = {id, value}
-    this.props.handleItem(currItem)
+    if(value) {
+      this.props.handleItem(currItem)
+    }
   }
 
   render() {
@@ -40,5 +42,5 @@ export class Item extends Component {
 }
 }
 
-export default Item;
+export default NewItem;
 
