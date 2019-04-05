@@ -20,8 +20,7 @@ export class Note extends Component {
 
   render() {
     const { title, items, id } = this.props
-    // key={Date.now()} - may need shortid?
-    const itemList = items.map(item => <li>{item}</li>)
+    const itemList = items.map(item => <li key={item.id}>{item.value}</li>)
     return(
       <form>
         <p>{title}</p>

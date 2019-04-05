@@ -27,6 +27,10 @@ export const getNotes = async () => {
 }
 
 export const removeNote = async (id) => {
+  // console.log(id)
+  // console.log(typeof id)
+  // let intid = parseInt(id)
+  // console.log(intid)
   const url = `http://localhost:3001/api/v1/notes/${id}`
   try {
     const response = await fetch(url, {
@@ -36,7 +40,7 @@ export const removeNote = async (id) => {
         'Content-Type': 'application/json'
       },
     })
-
+    const returnMessage = await response.json();
   } catch(error) {
     return error.message
   }
