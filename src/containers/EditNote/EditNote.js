@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteNote } from '../../actions';
 import { removeNote } from '../../helpers/apiCalls';
+import EditItem from '../../components/EditItem/EditItem'
 
 
 export class EditNote extends Component {
@@ -27,12 +28,18 @@ export class EditNote extends Component {
   }
 
   render() {
-    console.log(this.props)
+    const { title, items, id } = this.props
+    let editableItems
+    if (items) {
+      editableItems = items.map(item => <EditItem {...item} />)
+    }
+
     return(
       <div>
         <p>Edit Note!</p>
-        <p>{this.props.title}</p>
-        <div onClick={() => this.handleDelete(this.props.id)}>X</div>
+        <p>{title}</p>
+        <div onClick={() => this.handleDelete(id)}>X</div>
+        {editableItems}
       </div>
     )
   }

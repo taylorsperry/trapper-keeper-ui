@@ -3,6 +3,7 @@ import './_NewNote.scss'
 import { addNote } from '../../helpers/apiCalls'
 import { connect } from 'react-redux'
 import { storeNote } from '../../actions'
+import { withRouter } from 'react-router-dom'
 import NewItem from '../../components/NewItem/NewItem'
 
 export class NewNote extends Component {
@@ -20,15 +21,14 @@ handleChange = (e) => {
   this.setState( {[e.target.name]: e.target.value} )
 }
 
-handleBlur = () => {
-  this.setState( {items: [...this.state.items, this.state.listText], listText: ''} )
-}
-
 sendNote = async (e) => {
   e.preventDefault()
+  let { history } = this.props;
   const { title, items} = this.state
-  const newNote = await addNote({title, items})
+  const note = {title, items}
+  const newNote = await addNote(note)
   this.props.storeNote(newNote)
+  history.push('/')
 }
 
 handleItem = (currItem) => {
@@ -66,7 +66,7 @@ render() {
   let inputs = []
 
   for (let i = 0; i <= this.state.inputs; i++) {
-    inputs.push(<NewItem key={Date.now()} handleItem={this.handleItem} handleChange={this.handleChange} />)
+    inputs.push(<NewItem handleItem={this.handleItem} handleChange={this.handleChange} />)
   }
 
   return (
@@ -81,7 +81,9 @@ render() {
         </input>
         {inputs}
         <div className='note-controls'>
-          <button className='save-note'>Save Note</button>
+          
+            <button className='save-note'>Save Note</button>
+          
         </div>
       </form>
     </div>
@@ -93,5 +95,5 @@ export const mapDispatchToProps = (dispatch) => ({
   storeNote: (note) => dispatch(storeNote(note))
 })
 
-export default connect(null, mapDispatchToProps)(NewNote);
+export default withRouter(connect(null, mapDispatchToProps)(NewNote));
 
