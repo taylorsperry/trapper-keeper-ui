@@ -156,7 +156,42 @@ describe('NewNote', () => {
     })
   })
 
-  
+  describe('addItem', () => {
+    it('should update state with new item and inputs value', () => {
+      const mockState = {
+        inputs: 0, 
+        title: 'note title', 
+        listText: '',
+        items: [
+          {
+           id: 2,
+           value: 'hello',
+           completed: false,
+         },
+           {
+            id: 1,
+            value: 'some text',
+            completed: true,
+         }
+         ]
+       }
+
+       const mockCurrItem = {
+        id: 3,
+        value: 'a new item',
+        completed: false,
+     }
+
+       wrapper.setState(mockState)
+
+       wrapper.instance().addItem(mockCurrItem)
+
+       expect(wrapper.state('inputs')).toEqual( 1 )
+       expect(wrapper.state('items')).toEqual([...mockState.items, mockCurrItem])
+    })
+  })
+
+ 
 
   describe('mapDispatchToProps', () => {
     const mockDispatch = jest.fn()
