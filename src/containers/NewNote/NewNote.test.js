@@ -17,42 +17,42 @@ describe('NewNote', () => {
   })
   //snapshot
   it('should have a default state', () => {
-    expect(wrapper.state()).toEqual( {title: '', item: '', items: []} )
+    expect(wrapper.state()).toEqual( {inputs: 0, title: '', listText: '', items: []} )
   })
 
   describe('handleChange', () => {
     it('should update the title state upon typing', () => {
-      expect(wrapper.state()).toEqual( {title: '', item: '', items: []} )
+      expect(wrapper.state()).toEqual( {inputs: 0, title: '', listText: '', items: []} )
       const mockEvent = {target:{value: 'typing', name: 'title'}}
 
       wrapper.instance().handleChange(mockEvent)
 
-      expect(wrapper.state()).toEqual( {title: 'typing', item: '', items: []} )
+      expect(wrapper.state()).toEqual( {inputs: 0, title: 'typing', listText: '', items: []} )
     })
 
     it('should update the item state upon typing', () => {
-      expect(wrapper.state()).toEqual( {title: '', item: '', items: []} )
-      const mockEvent = {target:{value: 'item one', name: 'item'}}
+      expect(wrapper.state()).toEqual( {inputs: 0, title: '', listText: '', items: []} )
+      const mockEvent = {target:{value: 'item one', name: 'listText'}}
 
       wrapper.instance().handleChange(mockEvent)
 
-      expect(wrapper.state()).toEqual( {title: '', item: 'item one', items: []} )
+      expect(wrapper.state()).toEqual( {inputs: 0, title: '', listText: 'item one', items: []} )
     })
   })
 
   describe('handleBlur', () => {
     it('should update the items state on blur and reset the item state', () => {
-      wrapper.setState({title: '', item: 'first item', items: []})
+      wrapper.setState({inputs: 0, title: '', listText: 'first item', items: []})
 
       wrapper.instance().handleBlur()
 
-      expect(wrapper.state()).toEqual( {title: '', item: '', items: ['first item']} )
+      expect(wrapper.state()).toEqual( {inputs: 0, title: '', listText: '', items: ['first item']} )
     })
   })
 
   describe('sendNote', () => {
     it('should update the api with a new note when a form is submitted', () => {
-      const mockState = {title: 'note title', item: '', items: ['first', 'second']}
+      const mockState = {inputs: 0, title: 'note title', listText: '', items: ['first', 'second']}
       const expected = {
         title: mockState.title,
         items: mockState.items
@@ -84,6 +84,79 @@ describe('NewNote', () => {
     //   expect(props.storeNote).toHaveBeenCalled()
     // })
   })
+
+  describe('handleItem', () => {
+
+    let mockState;
+
+    beforeEach(() => {
+      mockState = {
+        inputs: 0, 
+        title: 'note title', 
+        listText: '',
+        items: [
+          {
+           id: 2,
+           value: 'hello',
+           completed: false,
+         },
+           {
+            id: 1,
+            value: 'some text',
+            completed: true,
+         }
+         ]
+       }
+
+       wrapper.setState(mockState)
+    })
+
+    it('should call addItem if new item doesnt exist in state', () => {
+
+      expect(wrapper.state()).toEqual( mockState )
+
+      wrapper.instance().addItem = jest.fn()
+
+      const mockCurrItem = {
+        id: 4,
+        value: 'new text',
+        completed: false,
+     }
+
+     wrapper.instance().handleItem(mockCurrItem)
+     expect(wrapper.instance().addItem).toHaveBeenCalledWith(mockCurrItem)
+    })
+
+    it('should call updateItems if currItem exists in state with a modified existing item', () => {
+      expect(wrapper.state()).toEqual( mockState )
+
+      wrapper.instance().updateItems = jest.fn()
+
+      const mockCurrItem = {
+        id: 1,
+        value: 'some updated text',
+        completed: true,
+     }
+
+      const mockUpdatedItems = [
+          {
+           id: 2,
+           value: 'hello',
+           completed: false,
+         },
+           {
+            id: 1,
+            value: 'some updated text',
+            completed: true,
+         }
+        ]
+
+     wrapper.instance().handleItem(mockCurrItem)
+     expect(wrapper.instance().updateItems).toHaveBeenCalledWith(mockUpdatedItems)
+    })
+  })
+
+  
 
   describe('mapDispatchToProps', () => {
     const mockDispatch = jest.fn()

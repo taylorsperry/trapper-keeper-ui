@@ -6,6 +6,7 @@ export class NewItem extends Component {
     this.state = {
       value: '',
       id: Date.now(),
+      completed: false,
     }
   }
 
@@ -17,8 +18,8 @@ export class NewItem extends Component {
   }
 
   handleItemBlur = (e) => {
-    let { id, value } = this.state;
-    let currItem = {id, value}
+    let { id, value, completed } = this.state;
+    let currItem = {id, value, completed}
     if(value) {
       this.props.handleItem(currItem)
     }

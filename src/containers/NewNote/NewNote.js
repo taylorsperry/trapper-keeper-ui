@@ -66,7 +66,7 @@ render() {
   let inputs = []
 
   for (let i = 0; i <= this.state.inputs; i++) {
-    inputs.push(<NewItem handleItem={this.handleItem} handleChange={this.handleChange} />)
+    inputs.push(<NewItem key={Date.now()} handleItem={this.handleItem} handleChange={this.handleChange} />)
   }
 
   return (
