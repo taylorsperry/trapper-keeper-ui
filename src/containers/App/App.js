@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import NoteContainer from '../../components/NoteContainer/NoteContainer';
 import NewNote from '../NewNote/NewNote';
@@ -27,10 +27,14 @@ export class App extends Component {
       <div className="App">
         <header className="App-header">
           <div className='logo'>
-            <i class="fas fa-file"></i>
-            <h1>Trapper Keeper</h1>
+            <i className="fas fa-file"></i>
+            <Link to='/'>
+              <h1>Trapper Keeper</h1>
+            </Link>
           </div>
-          <button className='new-note'>New Note</button>
+          <Link to='/new-note'>
+            <button className='new-note'>New Note</button>
+          </Link>
         </header>
         <Route exact path='/' component= { () => <NoteContainer notes={this.props.notes} /> } />
         <Route path='/new-note' component={ NewNote } />

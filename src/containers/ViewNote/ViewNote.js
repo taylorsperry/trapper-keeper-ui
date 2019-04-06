@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export const ViewNote = (props) => {
 
     let { title, items, id } = props.note
-    let existingItems = items.map(item => <ViewItem existingValue={item.value} />)
+    let existingItems = items.map(item => <ViewItem key={item.id} existingValue={item.value} />)
     
     return(
       <form>
