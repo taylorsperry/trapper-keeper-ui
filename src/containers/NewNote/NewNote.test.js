@@ -70,19 +70,32 @@ describe('NewNote', () => {
       expect(addNote).toHaveBeenCalledWith(expected)
     })
 
-    // it('should update the store with a new note', async () => {
-    //   const props = {
-    //     storeNote: jest.fn()
-    //   }
+    it('should call storeNote with a new note', async () => {
+      const mockState = {inputs: 0, title: 'note title', listText: '', items: ['first', 'second']}
+      const expected = {
+        title: mockState.title,
+        items: mockState.items
+      }
 
-    //   const mockEvent = {
-    //     preventDefault: jest.fn()
-    //   }
+      wrapper.setState(mockState)
+      expect(wrapper.state()).toEqual( mockState )
 
-    //   await wrapper.instance().sendNote(mockEvent)
+      const props = {
+        storeNote: jest.fn()
+      }
+            wrapper = shallow(
+              <NewNote {...props} />
+            )
 
-    //   expect(props.storeNote).toHaveBeenCalled()
-    // })
+      const mockEvent = {
+        preventDefault: jest.fn()
+      }
+
+      await wrapper.instance().sendNote(mockEvent)
+      expect(addNote).toHaveBeenCalledWith(expected)
+      const addedNote = await addNote(expected)
+      expect(wrapper.instance().props.storeNote).toHaveBeenCalledWith(addedNote)
+    })
   })
 
   describe('handleItem', () => {
