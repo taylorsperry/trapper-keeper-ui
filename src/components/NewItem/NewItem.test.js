@@ -7,7 +7,8 @@ describe('NewItem', () => {
 
   beforeEach(() => {
     const props = {
-      handleChange: jest.fn()
+      handleChange: jest.fn(),
+      handleItem: jest.fn()
     }
 
     Date.now = jest.fn().mockImplementation(() => 6)
@@ -44,4 +45,32 @@ describe('NewItem', () => {
     expect(wrapper.state('value')).toEqual('hey')
     expect(wrapper.instance().props.handleChange).toHaveBeenCalledWith(mockEvent)
   })
+
+describe('handleItemBlur', () => {
+  it('should call handleItem with the properties in state', () => {
+    const mockState = {
+      value: 'he',
+      id: 6,
+      completed: false,
+    }
+    wrapper.setState(mockState)
+    expect(wrapper.instance().state).toEqual(mockState)
+
+    wrapper.instance().handleItemBlur()
+    expect(wrapper.instance().props.handleItem).toHaveBeenCalledWith(mockState)
+  })
+
+  it('should not call handleItem if the value in state is and empty string', () => {
+    const mockState = {
+      value: '',
+      id: 6,
+      completed: false,
+    }
+    wrapper.setState(mockState)
+    expect(wrapper.instance().state).toEqual(mockState)
+
+    wrapper.instance().handleItemBlur()
+    expect(wrapper.instance().props.handleItem).not.toHaveBeenCalled()
+  })
+})
 })
