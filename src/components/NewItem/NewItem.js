@@ -26,22 +26,21 @@ export class NewItem extends Component {
   }
 
   render() {
-  return (
-    <div className='list-container'>
-      <button className='list-control'></button>
-      <textarea value={this.state.value}
-                onChange={this.handleItemChange} 
-                onBlur={this.handleItemBlur}
-                name='listText'
-                placeholder='Add an item . . .'
-                className='list-item'
-              >
-      </textarea>
-      <button className='list-control delete-item'>X</button>
-    </div>
-  )
-}
+    return (
+      <div className='list-container'>
+        <button className='list-control'></button>
+        <textarea value={this.state.value}
+                  onChange={this.handleItemChange} 
+                  onBlur={this.handleItemBlur}
+                  name='listText'
+                  placeholder='Add an item . . .'
+                  className='list-item'
+                >
+        </textarea>
+        <button className='list-control delete-item'>X</button>
+      </div>
+    )
+  }
 }
 
 export default NewItem;
-
