@@ -5,7 +5,7 @@ export class EditItem extends Component {
     super(props); 
       this.state = {
         value: '',
-        id: this.props.id,
+        // id: this.props.id,
         completed: false,
       }
   }
@@ -18,16 +18,18 @@ export class EditItem extends Component {
   }
 
   handleItemBlur = (e) => {
-    let { id, value, completed } = this.state
-    let currItem = {id, value, completed}
+    let { value, completed } = this.state
+    let currItem = {id: this.props.id, value, completed}
     if(value) {
       this.props.handleItem(currItem)
+      this.setState({ value: '' })
     }
   }
 
+
   render() {
     console.log(this.props)
-    const { value } = this.props
+    const { value, id } = this.props
     return (
       <div className='list-container'>
         <button className='list-control'></button>
@@ -39,7 +41,7 @@ export class EditItem extends Component {
                   placeholder='Add a new item...'
                   >
         </textarea>
-        <button className='list-control delete-item'>X</button>
+        <div className='list-control delete-item' onClick={() => this.props.handleItemDelete(id)}>X</div>
       </div>
     )
   }

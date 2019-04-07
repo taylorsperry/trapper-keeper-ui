@@ -12,6 +12,7 @@ export const notes = (state = [], action) => {
         if (note.id === action.updatedNote.id) {
           note = action.updatedNote
         }
+        return note
       })
 
     case 'DELETE_NOTE':
