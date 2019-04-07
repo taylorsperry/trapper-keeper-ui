@@ -13,7 +13,6 @@ export class NewNote extends Component {
       title: '',
       listText: '',
       items: [],
-      inputs: 0,
     }
   }
 
@@ -48,27 +47,30 @@ handleItem = (currItem) => {
 }
 
 addItem = (currItem) => {
-  let count = this.state.inputs
-  count++
   this.setState({
     items: [...this.state.items, currItem],
-    inputs: count
   })
 }
 
 updateItems = (updatedItems) => {
+  let incompleteItems = updatedItems.filter(item => !item.completed)
+  let completeItems = updatedItems.filter(item => item.completed)
   this.setState({
-    items: updatedItems
+    items: [...incompleteItems, ...completeItems]
   })
 }
 
 render() {
-  let inputs = []
+  let { items } = this.state
 
-  for (let i = 0; i <= this.state.inputs; i++) {
-    inputs.push(<NewItem handleItem={this.handleItem} handleChange={this.handleChange} />)
-  }
-
+  let existingItems = items.map(item => <NewItem 
+              {...item} 
+              handleItem={this.handleItem} 
+              handleChange={this.handleChange}
+            />)
+  
+  let filteredItems = [...existingItems, <NewItem handleItem={this.handleItem} handleChange={this.handleChange} />]
+  
   return (
     <div className='form-container'>
       <form onSubmit={this.sendNote}>
@@ -79,11 +81,11 @@ render() {
               placeholder='Title'
               >
         </input>
-        {inputs}
+          <div>
+            {filteredItems}
+          </div>
         <div className='note-controls'>
-          
             <button className='save-note'>Save Note</button>
-          
         </div>
       </form>
     </div>
