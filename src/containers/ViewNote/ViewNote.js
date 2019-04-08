@@ -8,13 +8,12 @@ export const ViewNote = (props) => {
   let existingItems = items.map(item => <ViewItem key={item.id} existingValue={item.value} />)
   
   return(
-    <form>
-      <p>{title}</p>
-      {existingItems}
-      <Link to={`/notes/${id}`}>
-        <button>Edit Note</button>
-      </Link>
-    </form>
+    <Link to={`/notes/${id}`}>
+      <form>
+        <p>{title}</p>
+        {existingItems}
+      </form>
+    </Link>
   )
 }
 
