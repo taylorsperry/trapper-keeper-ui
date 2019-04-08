@@ -5,10 +5,13 @@ export class EditItem extends Component {
     super(props); 
       this.state = {
         value: '',
-        // id: this.props.id,
         completed: false,
       }
   }
+
+  // componentDidMount = () => {
+  //   this.setState({ value: this.props.value })
+  // }
 
   handleItemChange = (e) => {
     this.setState({
@@ -19,18 +22,24 @@ export class EditItem extends Component {
 
   handleItemBlur = (e) => {
     let { value, completed } = this.state
-    let currItem = {id: this.props.id, value, completed}
+    let currItem
+    if (!this.props.id) {
+      currItem = {id: Date.now(), value, completed}
+    } else {
+      currItem = {id: this.props.id, value, completed}
+    }
     if(value) {
       this.props.handleItem(currItem)
-      this.setState({ value: '' })
     }
+    // this.setState({ value: ''})
   }
 
 
   render() {
-    console.log(this.props)
+    console.log(this.props.value)
     const { value, id } = this.props
-    return (
+
+    let card = (
       <div className='list-container'>
         <button className='list-control'></button>
         <textarea defaultValue={value}
@@ -43,6 +52,24 @@ export class EditItem extends Component {
         </textarea>
         <div className='list-control delete-item' onClick={() => this.props.handleItemDelete(id)}>X</div>
       </div>
+    )
+  
+    return (
+      <div>
+      {value && card}
+      </div>
+      // <div className='list-container'>
+      //   <button className='list-control'></button>
+      //   <textarea defaultValue={value}
+      //             className='list-item'
+      //             onBlur={this.handleItemBlur}
+      //             onChange={this.handleItemChange}
+      //             name='listText'
+      //             placeholder='Add a new item...'
+      //             >
+      //   </textarea>
+      //   <div className='list-control delete-item' onClick={() => this.props.handleItemDelete(id)}>X</div>
+      // </div>
     )
   }
 }

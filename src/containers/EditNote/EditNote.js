@@ -14,15 +14,12 @@ export class EditNote extends Component {
       listText: '',
       id: '',
       items: [],
-      inputs: 0,
+      // inputs: 0,
     }
   }
 
   componentDidMount = () => {
-    console.log('mount runs')
-    if (!this.state.id) {
       this.gatherInfo(this.props)
-    }
   }
 
   gatherInfo = (props) => {
@@ -60,11 +57,11 @@ export class EditNote extends Component {
   }
 
   addItem = (currItem) => {
-    let count = this.state.inputs
-    count++
+    // let count = this.state.inputs
+    // count++
     this.setState({
       items: [...this.state.items, currItem],
-      inputs: count,
+      // inputs: count,
     })
   }
   
@@ -83,7 +80,7 @@ export class EditNote extends Component {
   sendUpdate = async (e) => {
     e.preventDefault()
     let { history } = this.props
-    const { title, items, id } = this.state
+    const { title, items } = this.state
     const note = {title, items, id: this.props.id}
     console.log(note)
     const response = await updateNote(note)
@@ -92,21 +89,28 @@ export class EditNote extends Component {
   }
 
   render() {
-    const { title, items, id } = this.props
+    const { id } = this.props
     let editableItems
+    let filterItems
+    console.log(this.state.items)
     if (this.state.items) {
-      editableItems = this.state.items.map(item => <EditItem {...item} handleChange={this.handleChange} handleItem={this.handleItem} handleItemDelete={this.handleItemDelete}/>)
+      editableItems = this.state.items.map(item => <EditItem {...item} handleChange={this.handleChange} handleItem={this.handleItem} handleItemDelete={this.handleItemDelete} />)
+      filterItems = [...editableItems, <EditItem handleItem={this.handleItem} handleChange={this.handleChange} handleItemDelete={this.handleItemDelete} value={'Add a new item...'}/>]
     }
-
-    let inputs = []
-    for (let i = 0; i <= this.state.inputs; i++) {
-      inputs.push(<EditItem handleItem={this.handleItem} 
-                            handleChange={this.handleChange} 
-                            handleItemDelete={this.handleItemDelete}
-                            />)
-    }
+    console.log('render')
+    console.log(filterItems)
+    // let inputs = []
+    // for (let i = 0; i <= this.state.inputs; i++) {
+    //   inputs.push(<EditItem handleItem={this.handleItem} 
+    //                         handleChange={this.handleChange} 
+    //                         handleItemDelete={this.handleItemDelete}
+    //                         />)
+    // }
     // console.log(this.props)
     // console.log(this.state)
+
+    
+
     return(
       <div className='form-container'>
         <form onSubmit={this.sendUpdate}>
@@ -116,8 +120,7 @@ export class EditNote extends Component {
                     name='title'
                     >
           </textarea>
-          {editableItems}
-          {inputs}
+          {filterItems}
           <div className='note-controls'>
             
             <button className='save-note'>Save Note</button>
