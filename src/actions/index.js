@@ -18,6 +18,11 @@ export const storeUpdate = (updatedNote) => ({
   updatedNote
 })
 
+export const changeItem = (item) => ({
+  type: 'CHANGE_ITEM',
+  item
+})
+
 // ACTION IDEAS
 
 // Action to mark item as complete? I think this would 'move' the item to back of array
