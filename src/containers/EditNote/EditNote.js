@@ -24,8 +24,9 @@ export class EditNote extends Component {
     })
   }
 
-  updateState = (newItem) => {
+  updateState = (newItem, completed) => {
     console.log(this.state)
+    console.log(completed)
     if(this.state.items.length) {
       const updatedItems = this.state.items.map(item => {
         if (item.id == newItem.id) {
@@ -75,35 +76,37 @@ export class EditNote extends Component {
   }
 
   render() {
-    console.log(this.props)
-    const { title, items, id } = this.props
-    console.log(this.state)
+    console.log(this.state.items)
     return (
-      <form onSubmit={this.editNote}>
-        <h2>{title}</h2>
-        {this.state.items && 
-          this.state.items.map(item => <EditItem {...item} 
-                                      updateItem={this.updateState}
-                                      delete={this.deleteItem}
-                                      key={item.value}
-                                    /> )
-        }
-        <div className='note-controls'>
+      <div className="form-container">
+        <form onSubmit={this.editNote}>
+        <input className='title' 
+              // onChange={this.handleChange}
+              defaultValue={this.state.title}
+              name="title"
+              placeholder='Title'
+              >
+        </input>
+          {this.state.items && 
+            this.state.items.map(item => <EditItem {...item} 
+                                        updateItem={this.updateState}
+                                        delete={this.deleteItem}
+                                        key={item.id}
+                                      /> )
+          }
+          <div className="note-controls">
           <button className='save-note'>Save</button>
-          <button className='delete-note' onClick={() => this.handleDeleteNote(id)}>X</button>
-        </div>
-      </form>
+          <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
+          </div>
+        </form>
+      </div>
     )
   }
 }
-
-export const mapStateToProps = (state) => ({
-  notes: state.notes
-})
 
 export const mapDispatchToProps = (dispatch) => ({
   deleteNote: (id) => dispatch(deleteNote(id)),
   storeUpdate: (note) => dispatch(storeUpdate(note))
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditNote));
+export default withRouter(connect(null, mapDispatchToProps)(EditNote));
