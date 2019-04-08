@@ -30,6 +30,7 @@ export class EditItem extends Component {
     if(this.state.value) {
       this.props.updateItem(this.state)
     }
+    this.setState({value: ''})
   }
 
   deleteItem = (e) => {
