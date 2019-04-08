@@ -33,7 +33,6 @@ export class EditNote extends Component {
         return item
       })
       let index = updatedItems.indexOf(newItem)
-      console.log(index)
       if(!updatedItems[index + 1]) {
         this.setState({
           items: [...updatedItems, {value: '', id: Date.now(), completed: false} ]
@@ -57,6 +56,14 @@ export class EditNote extends Component {
     this.props.storeUpdate(this.state)
   }
 
+  deleteItem = async (itemId) => {
+    let newItems = this.state.items.filter(item => item.id !== itemId)
+    this.setState({items: newItems})
+    const { id, title } = this.state
+    const editedNote = await updateNote({id, title, items: newItems})
+    this.props.storeUpdate(this.state)
+  }
+
   render() {
     console.log(this.props)
     const { title, items, id } = this.props
@@ -67,6 +74,8 @@ export class EditNote extends Component {
         {this.state.items && 
           this.state.items.map(item => <EditItem {...item} 
                                       updateItem={this.updateState}
+                                      delete={this.deleteItem}
+                                      key={item.value}
                                     /> )
         }
         <button>Save</button>

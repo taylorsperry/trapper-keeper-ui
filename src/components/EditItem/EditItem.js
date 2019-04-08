@@ -30,10 +30,26 @@ export class EditItem extends Component {
     if(this.state.value) {
       this.props.updateItem(this.state)
     }
+    this.setState({value: ''})
+  }
+
+  deleteItem = (e) => {
+    e.preventDefault()
+    this.setState({value: ''})
+    this.props.delete(this.state.id)
+  }
+
+  toggleCompleted = (e) => {
+    e.preventDefault()
+    let complete = !this.state.completed
+    const {value, id} = this.state
+    this.props.updateItem({value, id, complete})
+    this.setState({completed: !this.state.completed})
   }
 
   render() {
     const { value, id, completed } = this.props
+    console.log(this.state)
     return (
       <div className='list-container' >
         <textarea onChange={this.updateItem}
@@ -42,8 +58,8 @@ export class EditItem extends Component {
         </textarea>
         <h4>{completed}</h4>
         <h5>{id}</h5>
-        <button className='list-control'></button>
-        <button className='list-control delete-item'>X</button>
+        <button className='list-control' onClick={this.toggleCompleted}></button>
+        <button className='list-control delete-item' onClick={this.deleteItem}>X</button>
       </div>
     )
   }
