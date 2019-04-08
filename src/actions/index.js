@@ -1,17 +1,22 @@
 export const storeNote = (note) => ({
   type: 'STORE_NOTE',
   note
-});
+})
 
 export const storeSavedNotes = (notes) => ({
   type: 'STORE_SAVED_NOTES',
   notes
-});
+})
 
 export const deleteNote = (id) => ({
   type: 'DELETE_NOTE',
   id
-});
+})
+
+export const storeUpdate = (updatedNote) => ({
+  type: 'STORE_UPDATE',
+  updatedNote
+})
 
 // ACTION IDEAS
 
@@ -21,16 +26,11 @@ export const deleteNote = (id) => ({
 // Action to remove a list item?
 // export const deleteItem = () => {}
 
-// Action to update a whole note
-// export const updateNote = () => {}
-
-
-
 // export const isLoading = (bool) => ({
 //   type: 'IS_LOADING',
-// });
+// })
 
 
 // export const hasError = () => ({
 //   type: 'HAS_ERROR',
-// });
+// })

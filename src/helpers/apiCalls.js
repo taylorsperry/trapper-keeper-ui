@@ -9,7 +9,7 @@ export const addNote = async (note) => {
       },
     })
       const addedNote = await response.json()
-      return addedNote;
+      return addedNote
   } catch (error) {
     return error.message
   }
@@ -22,6 +22,23 @@ export const getNotes = async () => {
     const allNotes = await response.json();
     return allNotes.notes
   } catch (error) {
+    return error.message
+  }
+}
+
+export const updateNote = async (note)=> {
+  const url = `http://localhost:3001/api/v1/notes/${note.id}`
+  try {
+    const response = await fetch (url, {
+      method: 'PUT',
+      body: JSON.stringify(note),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const updatedNote = await response.json();
+    return updatedNote
+  } catch(error) {
     return error.message
   }
 }

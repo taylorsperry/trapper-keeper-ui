@@ -5,7 +5,7 @@ export class NewItem extends Component {
     super(props);
     this.state = {
       value: '',
-      id: Date.now(),
+      id: this.id || Date.now(),
       completed: false,
     }
   }
@@ -25,23 +25,36 @@ export class NewItem extends Component {
     }
   }
 
+  handleCheck = (e) => {
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name] : value
+    }, () => this.handleItemBlur())
+  }
+
   render() {
-  return (
-    <div className='list-container'>
-      <button className='list-control'></button>
-      <textarea value={this.state.value}
-                onChange={this.handleItemChange} 
-                onBlur={this.handleItemBlur}
-                name='listText'
-                placeholder='Add an item . . .'
-                className='list-item'
-              >
-      </textarea>
-      <button className='list-control delete-item'>X</button>
-    </div>
-  )
-}
+    return (
+      <div className='list-container'>
+        <input type='checkbox'
+               className='list-control'
+               name='completed'
+               checked={this.state.completed}
+               onChange={this.handleCheck}>
+        </input>
+        <textarea value={this.state.value}
+                  onChange={this.handleItemChange} 
+                  onBlur={this.handleItemBlur}
+                  name='listText'
+                  placeholder='Add an item . . .'
+                  className='list-item'
+                >
+        </textarea>
+        <button className='list-control delete-item'>X</button>
+      </div>
+    )
+  }
 }
 
 export default NewItem;
-

@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
-import { Route, withRouter, Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Route, withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import NoteContainer from '../../components/NoteContainer/NoteContainer';
-import NewNote from '../NewNote/NewNote';
-import { storeSavedNotes } from '../../actions';
-import { getNotes } from '../../helpers/apiCalls';
+import NoteContainer from '../../components/NoteContainer/NoteContainer'
+import NewNote from '../NewNote/NewNote'
+import { storeSavedNotes } from '../../actions'
+import { getNotes } from '../../helpers/apiCalls'
 import EditNote from '../EditNote/EditNote'
-import './_App.scss';
+import './_App.scss'
 
 export class App extends Component {
   
   componentDidMount = async () => {
     if (!this.props.notes.length) {
-      const allNotes = await getNotes();
+      const allNotes = await getNotes()
       this.props.storeSavedNotes(allNotes)
     }
   }
 
   findNote = ({ match }) => {
+    console.log(match.params)
     const foundNote = this.props.notes.find(note => note.id === match.params.id)
+    // console.log(foundNote)
     return <EditNote {...foundNote} />
   }
   
@@ -40,7 +42,7 @@ export class App extends Component {
         <Route path='/new-note' component={ NewNote } />
         <Route path='/notes/:id' render={this.findNote} />
       </div>
-    );
+    )
   }
 }
 
@@ -52,4 +54,4 @@ export const mapDispatchToProps = (dispatch) => ({
   storeSavedNotes: (notes) => dispatch(storeSavedNotes(notes))
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

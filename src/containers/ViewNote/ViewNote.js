@@ -4,19 +4,18 @@ import { Link } from 'react-router-dom'
 
 export const ViewNote = (props) => {
 
-    let { title, items, id } = props.note
-    let existingItems = items.map(item => <ViewItem key={item.id} existingValue={item.value} />)
-    
-    return(
-      <form>
-        <Link to={`/notes/${id}`}>
-        <p>{title}</p>
-        {existingItems}
-        </Link>
-      </form>
-    )
+  let { title, items, id } = props.note
+  let existingItems = items.map(item => <ViewItem key={item.id} existingValue={item.value} />)
   
+  return(
+    <form>
+      <p>{title}</p>
+      {existingItems}
+      <Link to={`/notes/${id}`}>
+        <button>Edit Note</button>
+      </Link>
+    </form>
+  )
 }
 
 export default ViewNote
-
