@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import EditItem from '../../components/EditItem/EditItem';
-import NewItem from '../../components/NewItem/NewItem';
-import { updateNote } from '../../helpers/apiCalls';
-import { connect } from 'react-redux';
-import { storeUpdate } from '../../actions';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import EditItem from '../../components/EditItem/EditItem'
+import NewItem from '../../components/NewItem/NewItem'
+import { updateNote, removeNote } from '../../helpers/apiCalls'
+import { connect } from 'react-redux'
+import { storeUpdate, deleteNote } from '../../actions'
 
 export class EditNote extends Component {
   constructor(props) {
@@ -47,6 +48,7 @@ export class EditNote extends Component {
 
   editNote = async (e) => {
     e.preventDefault()
+    const { history } = this.props
     let newItems = this.state.items.filter(item => item.value)
     this.setState({
       items: newItems
@@ -54,6 +56,7 @@ export class EditNote extends Component {
     const { id, title } = this.state
     const editedNote = await updateNote({id, title, items: newItems})
     this.props.storeUpdate(this.state)
+    history.push('/')
   }
 
   deleteItem = async (itemId) => {
@@ -62,6 +65,13 @@ export class EditNote extends Component {
     const { id, title } = this.state
     const editedNote = await updateNote({id, title, items: newItems})
     this.props.storeUpdate(this.state)
+  }
+
+  handleDeleteNote = (id) => {
+    const { history } = this.props
+    this.props.deleteNote(id)
+    removeNote(id)
+    history.push('/')
   }
 
   render() {
@@ -78,7 +88,10 @@ export class EditNote extends Component {
                                       key={item.value}
                                     /> )
         }
-        <button>Save</button>
+        <div className='note-controls'>
+          <button className='save-note'>Save</button>
+          <button className='delete-note' onClick={() => this.handleDeleteNote(id)}>X</button>
+        </div>
       </form>
     )
   }
@@ -89,7 +102,8 @@ export const mapStateToProps = (state) => ({
 })
 
 export const mapDispatchToProps = (dispatch) => ({
+  deleteNote: (id) => dispatch(deleteNote(id)),
   storeUpdate: (note) => dispatch(storeUpdate(note))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditNote);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditNote));
