@@ -23,8 +23,9 @@ export class EditNote extends Component {
     })
   }
 
-  updateState = (newItem) => {
+  updateState = (newItem, completed) => {
     console.log(this.state)
+    console.log(completed)
     if(this.state.items.length) {
       const updatedItems = this.state.items.map(item => {
         if (item.id == newItem.id) {
@@ -33,10 +34,11 @@ export class EditNote extends Component {
         return item
       })
       let index = updatedItems.indexOf(newItem)
-      if(!updatedItems[index + 1]) {
+      if(!updatedItems[index + 1] && !completed) {
         this.setState({
           items: [...updatedItems, {value: '', id: Date.now(), completed: false} ]
         })
+        console.log(this.state.items)
       } else {
         this.setState({
           items: updatedItems
@@ -69,17 +71,27 @@ export class EditNote extends Component {
     const { title, items, id } = this.props
     console.log(this.state)
     return (
-      <form onSubmit={this.editNote}>
-        <h2>{title}</h2>
-        {this.state.items && 
-          this.state.items.map(item => <EditItem {...item} 
-                                      updateItem={this.updateState}
-                                      delete={this.deleteItem}
-                                      key={item.value}
-                                    /> )
-        }
-        <button>Save</button>
-      </form>
+      <div className="form-container">
+        <form onSubmit={this.editNote}>
+        <input className='title' 
+              // onChange={this.handleChange}
+              value={title}
+              name="title"
+              placeholder='Title'
+              >
+        </input>
+          {this.state.items && 
+            this.state.items.map(item => <EditItem {...item} 
+                                        updateItem={this.updateState}
+                                        delete={this.deleteItem}
+                                        key={item.value}
+                                      /> )
+          }
+          <div className="note-controls">
+            <button>Save</button>
+          </div>
+        </form>
+      </div>
     )
   }
 }
