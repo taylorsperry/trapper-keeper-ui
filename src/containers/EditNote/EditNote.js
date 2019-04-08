@@ -107,10 +107,6 @@ export class EditNote extends Component {
   }
 }
 
-export const mapStateToProps = (state) => ({
-  notes: state.notes
-})
-
 export const mapDispatchToProps = (dispatch) => ({
   deleteNote: (id) => dispatch(deleteNote(id)),
   storeUpdate: (note) => dispatch(storeUpdate(note))
