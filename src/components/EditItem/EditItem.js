@@ -30,7 +30,6 @@ export class EditItem extends Component {
     if(this.state.value) {
       this.props.updateItem(this.state)
     }
-    this.setState({value: ''})
   }
 
   deleteItem = (e) => {
@@ -39,11 +38,10 @@ export class EditItem extends Component {
     this.props.delete(this.state.id)
   }
 
-  toggleCompleted = (e) => {
-    e.preventDefault()
+  toggleCompleted = () => {
     let complete = !this.state.completed
     const {value, id} = this.state
-    this.props.updateItem({value, id, complete})
+    this.props.updateItem({value, id, complete}, 'completed')
     this.setState({completed: !this.state.completed})
   }
 
@@ -52,13 +50,19 @@ export class EditItem extends Component {
     console.log(this.state)
     return (
       <div className='list-container' >
+        <input type='checkbox'
+                className='list-control'
+                name='completed'
+                checked={this.state.completed}
+                onChange={this.toggleCompleted}
+                >
+        </input>
         <textarea onChange={this.updateItem}
+                  className="list-item"
                   onBlur={this.editItem}
-                  >{value}
+                  defaultValue={value}
+                  >
         </textarea>
-        <h4>{completed}</h4>
-        <h5>{id}</h5>
-        <button className='list-control' onClick={this.toggleCompleted}></button>
         <button className='list-control delete-item' onClick={this.deleteItem}>X</button>
       </div>
     )
