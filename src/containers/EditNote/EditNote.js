@@ -35,11 +35,10 @@ export class EditNote extends Component {
         return item
       })
       let index = updatedItems.indexOf(newItem)
-      if(!updatedItems[index + 1] && !completed) {
+      if(!updatedItems[index + 1]) {
         this.setState({
           items: [...updatedItems, {value: '', id: Date.now(), completed: false} ]
         })
-        console.log(this.state.items)
       } else {
         this.setState({
           items: updatedItems
@@ -77,15 +76,13 @@ export class EditNote extends Component {
   }
 
   render() {
-    console.log(this.props)
-    const { title, items, id } = this.props
-    console.log(this.state)
+    console.log(this.state.items)
     return (
       <div className="form-container">
         <form onSubmit={this.editNote}>
         <input className='title' 
               // onChange={this.handleChange}
-              value={title}
+              defaultValue={this.state.title}
               name="title"
               placeholder='Title'
               >
@@ -94,12 +91,12 @@ export class EditNote extends Component {
             this.state.items.map(item => <EditItem {...item} 
                                         updateItem={this.updateState}
                                         delete={this.deleteItem}
-                                        key={item.value}
+                                        key={item.id}
                                       /> )
           }
           <div className="note-controls">
           <button className='save-note'>Save</button>
-          <button className='delete-note' onClick={() => this.handleDeleteNote(id)}>X</button>
+          <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
           </div>
         </form>
       </div>
@@ -112,4 +109,4 @@ export const mapDispatchToProps = (dispatch) => ({
   storeUpdate: (note) => dispatch(storeUpdate(note))
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditNote));
+export default withRouter(connect(null, mapDispatchToProps)(EditNote));

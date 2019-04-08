@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import {changeItem} from '../../actions'
 
 export class EditItem extends Component {
-  constructor({props}) {
-    super({props});
+  constructor(props) {
+    super(props);
     this.state = {
       value: '',
       id: '',
-      completed: '',
+      completed: false,
     }
   }
 
@@ -26,7 +26,8 @@ export class EditItem extends Component {
     })
   }
 
-  editItem = () => {
+  editItem = (e) => {
+    e.preventDefault()
     if(this.state.value) {
       this.props.updateItem(this.state)
     }
@@ -41,32 +42,37 @@ export class EditItem extends Component {
   toggleCompleted = () => {
     let complete = !this.state.completed
     const {value, id} = this.state
-    this.props.updateItem({value, id, complete}, 'completed')
     this.setState({completed: !this.state.completed})
   }
 
   render() {
-    const { value, id, completed } = this.props
-    console.log(this.state)
+    let cardValue;
+    console.log(this.state.value)
+    if(this.state.value) {
+      cardValue = this.state.value
+    }
     return (
-      <div className='list-container' >
-        <input type='checkbox'
-                className='list-control'
-                name='completed'
-                checked={this.state.completed}
-                onChange={this.toggleCompleted}
-                >
-        </input>
-        <textarea onChange={this.updateItem}
-                  className="list-item"
-                  onBlur={this.editItem}
-                  defaultValue={value}
-                  >
-        </textarea>
-        <button className='list-control delete-item' onClick={this.deleteItem}>X</button>
-      </div>
-    )
-  }
+            <div className='list-container' >
+              <input type='checkbox'
+                      className='list-control'
+                      name='completed'
+                      checked={this.state.completed}
+                      onChange={this.toggleCompleted}
+                      >
+              </input>
+              {
+                this.state.id &&
+                <textarea onChange={this.updateItem}
+                          className="list-item"
+                          defaultValue={this.state.value}
+                          >
+                </textarea>
+              }
+              <button onClick={this.editItem}>Edit</button>
+              <button className='list-control delete-item' onClick={this.deleteItem}>X</button>
+            </div>
+         )
+      }
 }
 
 export default EditItem;
