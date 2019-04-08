@@ -1,48 +1,58 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import {changeItem} from '../../actions'
 
 export class EditItem extends Component {
-  constructor(props) {
-    super(props); 
-      this.state = {
-        value: '',
-        id: this.props.id,
-        completed: false,
-      }
+  constructor({props}) {
+    super({props});
+    this.state = {
+      value: '',
+      id: '',
+      completed: '',
+    }
   }
 
-  handleItemChange = (e) => {
+  componentDidMount = () => {
+    this.setState({
+      value: this.props.value,
+      id: this.props.id,
+      completed: this.props.completed,
+    })
+  }
+
+  updateItem = (e) => {
     this.setState({
       value: e.target.value
     })
-    this.props.handleChange(e)
   }
 
-  handleItemBlur = (e) => {
-    let { id, value, completed } = this.state
-    let currItem = {id, value, completed}
-    if(value) {
-      this.props.handleItem(currItem)
+  editItem = () => {
+    if(this.state.value) {
+      this.props.updateItem(this.state)
     }
   }
 
   render() {
-    console.log(this.props)
-    const { value } = this.props
+    const { value, id, completed } = this.props
     return (
-      <div className='list-container'>
-        <button className='list-control'></button>
-        <textarea defaultValue={value}
-                  className='list-item'
-                  onBlur={this.handleItemBlur}
-                  onChange={this.handleItemChange}
-                  name='listText'
-                  placeholder='Add a new item...'
-                  >
+      <div className='list-container' >
+        <textarea onChange={this.updateItem}
+                  onBlur={this.editItem}
+                  >{value}
         </textarea>
+        <h4>{completed}</h4>
+        <h5>{id}</h5>
+        <button className='list-control'></button>
         <button className='list-control delete-item'>X</button>
       </div>
     )
   }
 }
 
-export default EditItem
+export default EditItem;
+
+// export const mapDispatchToProps = (dispatch) => ({
+//   changeItem: (item) => dispatch(changeItem(item))
+// })
+
+// export default connect(null, mapDispatchToProps)(EditItem)
