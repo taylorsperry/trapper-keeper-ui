@@ -39,9 +39,6 @@ export class EditNote extends Component {
     this.setState({
       [e.target.name] : e.target.value
     })
-    if(e.key === 'Enter') {
-      this.handleSubmit(e)
-    }
   }
 
   updateState = (newItem, completed) => {
@@ -60,18 +57,26 @@ export class EditNote extends Component {
   }
 
   moveCompleted = (completedItem) => {
-    let newState;
-    if(completedItem.completed) {
-      newState = this.state.items.filter(item => item.id !== completedItem.id)
-      newState.push(completedItem)
-    } else {
-      newState = this.state.items.map(item => {
-        if(item.id == completedItem.id) {
-          item = completedItem
-        }
-        return item
-      })
-    }
+    // let newState;
+    let newState = this.state.items.map(item => {
+      if(item.id == completedItem.id) {
+        item = completedItem
+      }
+      return item
+    })
+    // if(completedItem.completed) {
+    //   newState = this.state.items.filter(item => item.id !== completedItem.id)
+    //   newState.push(completedItem)
+    // } else {
+    //   newState = this.state.items.filter(item => item.id !== completedItem.id)
+    //   newState.unshift(completedItem)
+    //   // newState = this.state.items.map(item => {
+    //   //   if(item.id == completedItem.id) {
+    //   //     item = completedItem
+    //   //   }
+    //   //   return item
+    //   // })
+    // }
         this.setState({
           items: newState,
         })
@@ -125,38 +130,56 @@ export class EditNote extends Component {
 
   addItem = (e) => {
     e.preventDefault()
-    let count = 0;
-    this.state.items.forEach(item => {
-      if(item.completed) {
-        count++
-      }
-    })
-    let indexVal = this.state.items.length - count;
-    this.state.items.splice(indexVal, 0, {value: '', id: Date.now(), completed: false})
+    this.state.items.push({value: '', id: Date.now(), completed: false})
     this.setState({
       items: this.state.items
     })
   }
 
-  render() {
+  returnItemElement = (item) => <EditItem {...item} 
+                                            updateItem={this.updateState}
+                                            delete={this.deleteItem}
+                                            key={item.id}
+                                            moveCompleted={this.moveCompleted}
+                                            />
+
+  checkKey = (e) => {
+    if(e.keyCode == 13) {
+      e.preventDefault()
+      e.keyCode = 9
+    }
+  }                                        
+                                 
+    render() {
+      let completeItems
+      let incompleteItems
+      let completeElements
+      let incompleteElements
+      if (this.state.items.length) {
+        completeItems = this.state.items.filter(item => item.completed === true)
+        incompleteItems = this.state.items.filter(item => item.completed === false)
+        completeElements = completeItems.map(item => this.returnItemElement(item))
+        incompleteElements = incompleteItems.map(item => this.returnItemElement(item))
+      }
+
+
+
     return (
       <div className="form-container">
         <form onSubmit={this.handleSubmit}>
         <input className='title' 
-              onKeyDown={this.handleChange}
+              onKeyUp={this.handleChange}
+              onKeyDown={this.checkKey}
               defaultValue={this.state.title}
               name="title"
               placeholder='Title'
               >
         </input>
           {this.state.items && 
-            this.state.items.map(item => <EditItem {...item} 
-                                        updateItem={this.updateState}
-                                        delete={this.deleteItem}
-                                        moveCompleted={this.moveCompleted}
-                                        handleSubmit={this.handleSubmit}
-                                        key={item.id}
-                                      /> )
+          <div>
+            {incompleteElements}
+            {completeElements}
+          </div>
           }
           <div className="note-controls">
           <button className="save-note"

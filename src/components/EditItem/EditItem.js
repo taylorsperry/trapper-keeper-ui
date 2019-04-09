@@ -24,8 +24,12 @@ export class EditItem extends Component {
     this.setState({
       value: e.target.value
     }, () => {this.props.updateItem(this.state)})
-    if(e.key === 'Enter') {
-      this.props.handleSubmit(e)
+  }
+
+  checkKey = (e) => {
+    if(e.keyCode == 13) {
+      e.preventDefault()
+      e.keyCode = 9
     }
   }
 
@@ -54,7 +58,8 @@ export class EditItem extends Component {
               </input>
               {
                 this.state.id &&
-                <textarea onKeyDown={this.updateItem}
+                <textarea onKeyUp={this.updateItem}
+                          onKeyDown={this.checkKey}
                           className="list-item"
                           defaultValue={this.state.value}
                           >
