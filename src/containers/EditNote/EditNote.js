@@ -47,6 +47,17 @@ export class EditNote extends Component {
     }
   }
 
+  moveCompleted = (completedItem) => {
+    console.log(this.state)
+    if(completedItem.completed) {
+      let newState = this.state.items.filter(item => item.id !== completedItem.id)
+      newState.push(completedItem)
+      this.setState({
+        items: newState,
+      })
+    }
+  }
+
   editNote = async (e) => {
     e.preventDefault()
     const { history } = this.props
@@ -76,7 +87,7 @@ export class EditNote extends Component {
   }
 
   render() {
-    console.log(this.state.items)
+    console.log(this.state)
     return (
       <div className="form-container">
         <form onSubmit={this.editNote}>
@@ -91,6 +102,7 @@ export class EditNote extends Component {
             this.state.items.map(item => <EditItem {...item} 
                                         updateItem={this.updateState}
                                         delete={this.deleteItem}
+                                        moveCompleted={this.moveCompleted}
                                         key={item.id}
                                       /> )
           }

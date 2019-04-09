@@ -42,7 +42,8 @@ export class EditItem extends Component {
   toggleCompleted = () => {
     let complete = !this.state.completed
     const {value, id} = this.state
-    this.setState({completed: !this.state.completed})
+    this.setState({completed: complete})
+    this.props.moveCompleted({value, id, completed: complete})
   }
 
   render() {
