@@ -24,6 +24,10 @@ export class EditItem extends Component {
     this.setState({
       value: e.target.value
     }, () => {this.props.updateItem(this.state)})
+    if(e.key === 'Enter') {
+      console.log('booop')
+      this.props.handleSubmit(e)
+    }
   }
 
   deleteItem = (e) => {
@@ -51,7 +55,7 @@ export class EditItem extends Component {
               </input>
               {
                 this.state.id &&
-                <textarea onChange={this.updateItem}
+                <textarea onKeyDown={this.updateItem}
                           className="list-item"
                           defaultValue={this.state.value}
                           >

@@ -157,6 +157,7 @@ export class EditNote extends Component {
                                         updateItem={this.updateState}
                                         delete={this.deleteItem}
                                         moveCompleted={this.moveCompleted}
+                                        handleSubmit={this.handleSubmit}
                                         key={item.id}
                                       /> )
           }
