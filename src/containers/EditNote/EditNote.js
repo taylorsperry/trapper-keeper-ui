@@ -1,25 +1,44 @@
-import React, { Component } from 'react';
-import EditItem from '../../components/EditItem/EditItem';
-import NewItem from '../../components/NewItem/NewItem';
-import { updateNote } from '../../helpers/apiCalls';
-import { connect } from 'react-redux';
-import { storeUpdate } from '../../actions';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import EditItem from '../../components/EditItem/EditItem'
+import NewItem from '../../components/NewItem/NewItem'
+import { addNote, updateNote, removeNote } from '../../helpers/apiCalls'
+import { connect } from 'react-redux'
+import { storeUpdate, deleteNote, storeNote } from '../../actions'
 
 export class EditNote extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.id,
-      items: this.props.items,
-      title: this.props.title,
+      id: '',
+      items: [],
+      title: '',
+      new: false,
     }
   }
 
   componentDidMount = () => {
+    if(this.props.id) {
+      this.setState({
+        id: this.props.id,
+        items: this.props.items,
+        title: this.props.title,
+      })
+    } else {
+      this.setState({
+        items: [{
+          id: Date.now(),
+          value: '',
+          completed: false,
+        }],
+        new: true,
+      })
+    }
+  }
+
+  handleChange = (e) => {
     this.setState({
-      id: this.props.id,
-      items: this.props.items,
-      title: this.props.title,
+      [e.target.name] : e.target.value
     })
   }
 
@@ -47,8 +66,30 @@ export class EditNote extends Component {
     }
   }
 
-  editNote = async (e) => {
+  handleSubmit = (e) => {
     e.preventDefault()
+    //either call editNote or sendNote
+    if(this.state.new === false) {
+      this.editNote()
+    } else {
+      this.sendNote()
+    }
+  }
+
+  sendNote = async () => {
+    console.log('fire')
+    let { history } = this.props;
+    const { title } = this.state
+    let items = this.state.items.filter(item => item.value)
+    const note = {title, items}
+    const newNote = await addNote(note)
+    this.props.storeNote(newNote)
+    history.push('/')
+  }
+
+  editNote = async () => {
+    
+    const { history } = this.props
     let newItems = this.state.items.filter(item => item.value)
     this.setState({
       items: newItems
@@ -56,26 +97,32 @@ export class EditNote extends Component {
     const { id, title } = this.state
     const editedNote = await updateNote({id, title, items: newItems})
     this.props.storeUpdate(this.state)
+    history.push('/')
   }
 
   deleteItem = async (itemId) => {
     let newItems = this.state.items.filter(item => item.id !== itemId)
     this.setState({items: newItems})
-    const { id, title } = this.state
+    const { id, title, items } = this.state
     const editedNote = await updateNote({id, title, items: newItems})
-    this.props.storeUpdate(this.state)
+    this.props.storeUpdate(id, title, items)
+  }
+
+  handleDeleteNote = (id) => {
+    const { history } = this.props
+    this.props.deleteNote(id)
+    removeNote(id)
+    history.push('/')
   }
 
   render() {
-    console.log(this.props)
-    const { title, items, id } = this.props
-    console.log(this.state)
+    console.log(this.state.items)
     return (
       <div className="form-container">
-        <form onSubmit={this.editNote}>
+        <form onSubmit={this.handleSubmit}>
         <input className='title' 
-              // onChange={this.handleChange}
-              value={title}
+              onChange={this.handleChange}
+              defaultValue={this.state.title}
               name="title"
               placeholder='Title'
               >
@@ -84,11 +131,12 @@ export class EditNote extends Component {
             this.state.items.map(item => <EditItem {...item} 
                                         updateItem={this.updateState}
                                         delete={this.deleteItem}
-                                        key={item.value}
+                                        key={item.id}
                                       /> )
           }
           <div className="note-controls">
-            <button>Save</button>
+          <button className='save-note'>Update</button>
+          <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
           </div>
         </form>
       </div>
@@ -96,12 +144,10 @@ export class EditNote extends Component {
   }
 }
 
-export const mapStateToProps = (state) => ({
-  notes: state.notes
-})
-
 export const mapDispatchToProps = (dispatch) => ({
-  storeUpdate: (note) => dispatch(storeUpdate(note))
+  deleteNote: (id) => dispatch(deleteNote(id)),
+  storeUpdate: (note) => dispatch(storeUpdate(note)),
+  storeNote: (note) => dispatch(storeNote(note))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditNote);
+export default withRouter(connect(null, mapDispatchToProps)(EditNote));

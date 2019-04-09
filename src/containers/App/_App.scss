@@ -27,6 +27,19 @@ i {
 
 a {
   text-decoration: none;
+  
+  &:link {
+    color:inherit
+  }
+  &:active {
+    color:inherit
+  }
+  &:visited {
+    color:inherit
+  }
+  &:hover {
+    color:inherit
+  }
 }
 
 h1 {
