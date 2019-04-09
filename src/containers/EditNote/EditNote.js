@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import EditItem from '../../components/EditItem/EditItem'
-import NewItem from '../../components/NewItem/NewItem'
 import { addNote, updateNote, removeNote } from '../../helpers/apiCalls'
 import { connect } from 'react-redux'
 import { storeUpdate, deleteNote, storeNote } from '../../actions'
@@ -51,17 +50,23 @@ export class EditNote extends Component {
         }
         return item
       })
-      let index = updatedItems.indexOf(newItem)
-      if(!updatedItems[index + 1]) {
-        this.setState({
-          items: [...updatedItems, {value: '', id: Date.now(), completed: false} ]
-        })
-      } else {
         this.setState({
           items: updatedItems
         })
-      }
+      
     }
+  }
+
+  moveCompleted = (completedItem) => {
+    let newState = this.state.items.map(item => {
+      if(item.id == completedItem.id) {
+        item = completedItem
+      }
+      return item
+    })
+        this.setState({
+          items: newState,
+        })
   }
 
   handleSubmit = (e) => {
@@ -84,7 +89,6 @@ export class EditNote extends Component {
   }
 
   editNote = async () => {
-    
     const { history } = this.props
     let editedItems = this.state.items.filter(item => item.value)
     this.setState({
@@ -111,27 +115,62 @@ export class EditNote extends Component {
     history.push('/')
   }
 
+  addItem = (e) => {
+    e.preventDefault()
+    this.state.items.push({value: '', id: Date.now(), completed: false})
+    this.setState({
+      items: this.state.items
+    })
+  }
+
+  returnItemElement = (item) => <EditItem {...item} 
+                                            updateItem={this.updateState}
+                                            delete={this.deleteItem}
+                                            key={item.id}
+                                            moveCompleted={this.moveCompleted}
+                                            />
+
+  checkKey = (e) => {
+    if(e.keyCode == 13) {
+      e.preventDefault()
+      e.keyCode = 9
+    }
+  }                                        
+                                 
   render() {
+    let completeItems
+    let incompleteItems
+    let completeElements
+    let incompleteElements
+    if (this.state.items.length) {
+      completeItems = this.state.items.filter(item => item.completed === true)
+      incompleteItems = this.state.items.filter(item => item.completed === false)
+      completeElements = completeItems.map(item => this.returnItemElement(item))
+      incompleteElements = incompleteItems.map(item => this.returnItemElement(item))
+    }
+
     return (
       <div className="form-container">
         <form onSubmit={this.handleSubmit}>
-        <input className='title' 
-              onChange={this.handleChange}
-              defaultValue={this.state.title}
-              name="title"
-              placeholder='Title'
-              >
-        </input>
+          <input className='title' 
+                onKeyUp={this.handleChange}
+                onKeyDown={this.checkKey}
+                defaultValue={this.state.title}
+                name="title"
+                placeholder='Title'
+                >
+          </input>
           {this.state.items && 
-            this.state.items.map(item => <EditItem {...item} 
-                                        updateItem={this.updateState}
-                                        delete={this.deleteItem}
-                                        key={item.id}
-                                      /> )
+            <div>
+              {incompleteElements}
+              {completeElements}
+            </div>
           }
           <div className="note-controls">
-          <button className='save-note'>Update</button>
-          <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
+            <button className="save-note"
+                    onClick={this.addItem}>Add An Item</button>
+            <button className='save-note'>Save Note</button>
+            <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
           </div>
         </form>
       </div>

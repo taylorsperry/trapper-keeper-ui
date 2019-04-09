@@ -23,13 +23,13 @@ export class EditItem extends Component {
   updateItem = (e) => {
     this.setState({
       value: e.target.value
-    })
+    }, () => {this.props.updateItem(this.state)})
   }
 
-  editItem = (e) => {
-    e.preventDefault()
-    if(this.state.value) {
-      this.props.updateItem(this.state)
+  checkKey = (e) => {
+    if(e.keyCode == 13) {
+      e.preventDefault()
+      e.keyCode = 9
     }
   }
 
@@ -42,15 +42,11 @@ export class EditItem extends Component {
   toggleCompleted = () => {
     let complete = !this.state.completed
     const {value, id} = this.state
-    this.setState({completed: !this.state.completed})
+    this.setState({completed: complete})
+    this.props.moveCompleted({value, id, completed: complete})
   }
 
   render() {
-    let cardValue;
-    console.log(this.state.value)
-    if(this.state.value) {
-      cardValue = this.state.value
-    }
     return (
             <div className='list-container' >
               <input type='checkbox'
@@ -62,13 +58,13 @@ export class EditItem extends Component {
               </input>
               {
                 this.state.id &&
-                <textarea onChange={this.updateItem}
+                <textarea onKeyUp={this.updateItem}
+                          onKeyDown={this.checkKey}
                           className="list-item"
                           defaultValue={this.state.value}
                           >
                 </textarea>
               }
-              <button onClick={this.editItem}>Edit</button>
               <button className='list-control delete-item' onClick={this.deleteItem}>X</button>
             </div>
          )
@@ -76,9 +72,3 @@ export class EditItem extends Component {
 }
 
 export default EditItem;
-
-// export const mapDispatchToProps = (dispatch) => ({
-//   changeItem: (item) => dispatch(changeItem(item))
-// })
-
-// export default connect(null, mapDispatchToProps)(EditItem)
