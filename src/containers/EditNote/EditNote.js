@@ -43,8 +43,6 @@ export class EditNote extends Component {
   }
 
   updateState = (newItem, completed) => {
-    console.log(this.state)
-    console.log(completed)
     if(this.state.items.length) {
       const updatedItems = this.state.items.map(item => {
         if (item.id == newItem.id) {
@@ -53,24 +51,28 @@ export class EditNote extends Component {
         return item
       })
       let index = updatedItems.indexOf(newItem)
-      if(!updatedItems[index + 1] && !completed) {
-        this.setState({
-          items: [...updatedItems, {value: '', id: Date.now(), completed: false} ]
-        })
-        console.log(this.state.items)
-      } else {
+      
         this.setState({
           items: updatedItems
         })
-      }
+      
     }
   }
 
   moveCompleted = (completedItem) => {
-    console.log(this.state)
     if(completedItem.completed) {
       let newState = this.state.items.filter(item => item.id !== completedItem.id)
       newState.push(completedItem)
+      this.setState({
+        items: newState,
+      })
+    } else {
+      let newState = this.state.items.map(item => {
+        if(item.id == completedItem.id) {
+          item = completedItem
+        }
+        return item
+      })
       this.setState({
         items: newState,
       })
@@ -88,7 +90,6 @@ export class EditNote extends Component {
   }
 
   sendNote = async () => {
-    console.log('fire')
     let { history } = this.props;
     const { title } = this.state
     let items = this.state.items.filter(item => item.value)
@@ -99,7 +100,6 @@ export class EditNote extends Component {
   }
 
   editNote = async () => {
-    
     const { history } = this.props
     let newItems = this.state.items.filter(item => item.value)
     this.setState({
@@ -126,8 +126,22 @@ export class EditNote extends Component {
     history.push('/')
   }
 
+  addItem = (e) => {
+    e.preventDefault()
+    let count = 0;
+    this.state.items.forEach(item => {
+      if(item.completed) {
+        count++
+      }
+    })
+    let indexVal = this.state.items.length - count;
+    this.state.items.splice(indexVal, 0, {value: '', id: Date.now(), completed: false})
+    this.setState({
+      items: this.state.items
+    })
+  }
+
   render() {
-    console.log(this.state)
     return (
       <div className="form-container">
         <form onSubmit={this.handleSubmit}>
@@ -147,7 +161,9 @@ export class EditNote extends Component {
                                       /> )
           }
           <div className="note-controls">
-          <button className='save-note'>Update</button>
+          <button className="save-note"
+                  onClick={this.addItem}>Add An Item</button>
+          <button className='save-note'>Save Note</button>
           <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
           </div>
         </form>

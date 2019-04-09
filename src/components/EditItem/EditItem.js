@@ -23,14 +23,7 @@ export class EditItem extends Component {
   updateItem = (e) => {
     this.setState({
       value: e.target.value
-    })
-  }
-
-  editItem = (e) => {
-    e.preventDefault()
-    if(this.state.value) {
-      this.props.updateItem(this.state)
-    }
+    }, () => {this.props.updateItem(this.state)})
   }
 
   deleteItem = (e) => {
@@ -64,7 +57,6 @@ export class EditItem extends Component {
                           >
                 </textarea>
               }
-              <button onClick={this.editItem}>Edit</button>
               <button className='list-control delete-item' onClick={this.deleteItem}>X</button>
             </div>
          )
@@ -72,9 +64,3 @@ export class EditItem extends Component {
 }
 
 export default EditItem;
-
-// export const mapDispatchToProps = (dispatch) => ({
-//   changeItem: (item) => dispatch(changeItem(item))
-// })
-
-// export default connect(null, mapDispatchToProps)(EditItem)
