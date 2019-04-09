@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import EditItem from '../../components/EditItem/EditItem'
-import NewItem from '../../components/NewItem/NewItem'
 import { addNote, updateNote, removeNote } from '../../helpers/apiCalls'
 import { connect } from 'react-redux'
 import { storeUpdate, deleteNote, storeNote } from '../../actions'
@@ -62,28 +61,25 @@ export class EditNote extends Component {
   }
 
   moveCompleted = (completedItem) => {
+    let newState;
     if(completedItem.completed) {
-      let newState = this.state.items.filter(item => item.id !== completedItem.id)
+      newState = this.state.items.filter(item => item.id !== completedItem.id)
       newState.push(completedItem)
-      this.setState({
-        items: newState,
-      })
     } else {
-      let newState = this.state.items.map(item => {
+      newState = this.state.items.map(item => {
         if(item.id == completedItem.id) {
           item = completedItem
         }
         return item
       })
-      this.setState({
-        items: newState,
-      })
     }
+        this.setState({
+          items: newState,
+        })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    //either call editNote or sendNote
     if(this.state.new === false) {
       this.editNote()
     } else {
