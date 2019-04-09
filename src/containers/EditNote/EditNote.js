@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import EditItem from '../../components/EditItem/EditItem'
 import { addNote, updateNote, removeNote } from '../../helpers/apiCalls'
 import { connect } from 'react-redux'
@@ -183,5 +184,13 @@ export const mapDispatchToProps = (dispatch) => ({
   storeUpdate: (note) => dispatch(storeUpdate(note)),
   storeNote: (note) => dispatch(storeNote(note))
 })
+
+EditNote.propTypes = {
+  deleteNote: PropTypes.func.isRequired,
+  storeUpdate: PropTypes.func.isRequired,
+  storeNote: PropTypes.func.isRequired,
+  foundNote: PropTypes.object
+}
+
 
 export default withRouter(connect(null, mapDispatchToProps)(EditNote));
