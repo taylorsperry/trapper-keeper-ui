@@ -52,7 +52,6 @@ export class EditNote extends Component {
         }
         return item
       })
-      let index = updatedItems.indexOf(newItem)
         this.setState({
           items: updatedItems
         })
