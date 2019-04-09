@@ -23,7 +23,7 @@ export const ViewNote = (props) => {
 }
 
 ViewNote.propTypes = {
-  note: PropTypes.object.isRequired
+  note: PropTypes.object
 }
 
 export default ViewNote

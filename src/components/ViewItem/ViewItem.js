@@ -13,7 +13,7 @@ export const ViewItem = (props) => {
 }
 
 ViewItem.propTypes = {
-  existingValue: PropTypes.string.isRequired
+  existingValue: PropTypes.string
 }
 
 export default ViewItem

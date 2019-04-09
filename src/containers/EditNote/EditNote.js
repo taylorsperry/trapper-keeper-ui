@@ -19,7 +19,6 @@ export class EditNote extends Component {
 
   componentDidMount = () => {
     if(this.props.id) {
-      console.log(this.props)
       this.setState({
         id: this.props.id,
         items: this.props.items,
@@ -84,8 +83,12 @@ export class EditNote extends Component {
     const { title } = this.state
     let items = this.state.items.filter(item => item.value)
     const note = {title, items}
-    const newNote = await addNote(note)
-    this.props.storeNote(newNote)
+    try {
+      const newNote = await addNote(note)
+      this.props.storeNote(newNote)
+    } catch(error) {
+      return error.message
+    }
     history.push('/')
   }
 
@@ -134,7 +137,6 @@ export class EditNote extends Component {
   checkKey = (e) => {
     if(e.keyCode == 13) {
       e.preventDefault()
-      e.keyCode = 9
     }
   }                                        
                                  
@@ -152,7 +154,7 @@ export class EditNote extends Component {
 
     return (
       <div className="form-container">
-        <form onSubmit={this.handleSubmit}>
+        <form className="form" onSubmit={this.handleSubmit}>
           <input className='title' 
                 onKeyUp={this.handleChange}
                 onKeyDown={this.checkKey}
@@ -170,7 +172,7 @@ export class EditNote extends Component {
           <div className="note-controls">
             <button className="save-note"
                     onClick={this.addItem}>Add An Item</button>
-            <button className='save-note'>Save Note</button>
+            <button className='save-note save'>Save Note</button>
             <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
           </div>
         </form>
@@ -186,9 +188,9 @@ export const mapDispatchToProps = (dispatch) => ({
 })
 
 EditNote.propTypes = {
-  deleteNote: PropTypes.func.isRequired,
-  storeUpdate: PropTypes.func.isRequired,
-  storeNote: PropTypes.func.isRequired,
+  deleteNote: PropTypes.func,
+  storeUpdate: PropTypes.func,
+  storeNote: PropTypes.func,
   foundNote: PropTypes.object
 }
 

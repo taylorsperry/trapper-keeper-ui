@@ -1,15 +1,15 @@
 import EditItem from './EditItem'
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 
 describe('EditItem', () => {
   let wrapper
+  let props
 
   beforeEach(() => {
-    const props = {
-      handleChange: jest.fn(),
-      handleItem: jest.fn(),
-      updateNoteItems: jest.fn(),
+    props = {
+      moveCompleted: jest.fn(),
+      updateItem: jest.fn(),
       delete: jest.fn(),
       value: 'test',
       id: '123',
@@ -52,43 +52,11 @@ describe('EditItem', () => {
     })
   })
 
-  describe('editItem', () => {
-    it('should be called when the correct button is clicked', () => {
-      const e = Object.assign(jest.fn(), {preventDefault: () => {}})
-      jest.spyOn(wrapper.instance(), 'editItem');
-      wrapper.find('.confirm-item').simulate('click', e)
-      expect(wrapper.instance().editItem).toBeCalled()
-    })
-
-    it('should call updateNoteItems if there is value in the input', () => {
-      const mockState = {
-        value: 'he',
-        id: 6,
-        completed: false,
-      }
-      const mockEmptyState = {
-        value: '',
-        id: 6,
-        completed: false,
-      }
-      const e = Object.assign(jest.fn(), {preventDefault: () => {}})
-      
-      wrapper.setState(mockEmptyState)
-      wrapper.instance().editItem(e)
-      expect(wrapper.instance().props.updateNoteItems).not.toBeCalled()
-      
-      wrapper.setState(mockState)
-      wrapper.instance().editItem(e)
-      expect(wrapper.instance().props.updateNoteItems).toBeCalled()
-    })
-  })
-
   describe('deleteItem', () => {
     it('should be called when the correct button is clicked', () => {
-      jest.spyOn(wrapper.instance(), 'deleteItem');
-      const e = Object.assign(jest.fn(), {preventDefault: () => {}})
-      wrapper.find('.delete-item').simulate('click', e)
-      expect(wrapper.instance().deleteItem).toBeCalled()
+      let mockEvent = { preventDefault: jest.fn() }
+      wrapper.find('.delete-item').simulate('click', mockEvent)
+      expect(wrapper.instance().props.delete).toHaveBeenCalled()
     })
 
     it('should clear state value', () => {
@@ -125,9 +93,10 @@ describe('EditItem', () => {
 
   describe('toggleCompleted', () => {
     it('should be called when the checkbox is changed', () => {
+      let input = wrapper.find('.complete-item')
       wrapper.instance().toggleCompleted = jest.fn()
-      wrapper.find('.complete-item').simulate('change')
-      expect(wrapper.instance().toggleCompleted).toBeCalled()
+      input.simulate('change')
+      expect(wrapper.instance().props.moveCompleted).toBeCalled()
     })
 
     it('should toggle state complete', () => {
@@ -144,6 +113,22 @@ describe('EditItem', () => {
       wrapper.setState(mockState)
       wrapper.instance().toggleCompleted()
       expect(wrapper.state()).toEqual(expected)
+    })
+  })
+
+  describe('checkKey', () => {
+    it('should prevent default if keyCode is 13', () => {
+      let mockEvent = {keyCode: 13, preventDefault: jest.fn()}
+      wrapper.instance().checkKey(mockEvent)
+
+      expect(mockEvent.preventDefault).toBeCalled()
+    })
+
+    it('should not prevent default if keyCode is not 13', () => {
+      let mockEvent = {keyCode: 11, preventDefault: jest.fn()}
+      wrapper.instance().checkKey(mockEvent)
+
+      expect(mockEvent.preventDefault).not.toHaveBeenCalled()
     })
   })
 })

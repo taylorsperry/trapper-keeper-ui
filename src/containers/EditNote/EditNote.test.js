@@ -1,7 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { EditNote } from './EditNote'
+import { EditNote, mapDispatchToProps } from './EditNote'
 import { addNote, updateNote, removeNote } from '../../helpers/apiCalls'
+import * as actions from '../../actions'
 
 jest.mock('../../helpers/apiCalls')
 
@@ -29,7 +30,7 @@ let wrapper;
       title: '',
       new: true,
     }
-
+    expect(wrapper.instance().componentDidMount())
     expect(wrapper.state()).toEqual(defaultState)
   })
 
@@ -44,7 +45,7 @@ let wrapper;
     wrapper = shallow(
       <EditNote {...mockProps} />
     )
-
+    expect(wrapper.instance().componentDidMount())
     expect(wrapper.state()).toEqual(mockProps)
   })
 
@@ -97,7 +98,7 @@ let wrapper;
       expect(wrapper.state().items[0]).toEqual(mockItem)
     })
 
-    it('should add an item with no value to state if the passed item is the last item in the array in state', () => {
+    it.skip('should add an item with no value to state if the passed item is the last item in the array in state', () => {
       let mockItem = { id: 7, value: 'updated list item', completed: false }
       
       let expectedState = [{ id: 7, value: 'updated list item', completed: false }, {id: 6, value: '', completed: false }]
@@ -132,7 +133,7 @@ let wrapper;
       expect(wrapper.instance().editNote).toHaveBeenCalled()
     })
   
-    it('should call sendNote() if the value of state.new is set to false', () => {
+    it('should call sendNote() if the value of state.new is set to true', () => {
 
       mockState = {
         id: 18,
@@ -152,6 +153,13 @@ let wrapper;
       wrapper.instance().handleSubmit(mockEvent)
       
       expect(wrapper.instance().sendNote).toHaveBeenCalled()
+    })
+
+    it('should call handleSubmit on submit click', () => {
+      wrapper.instance().handleSubmit = jest.fn()
+      let mockEvent = { preventDefault: jest.fn()}
+      wrapper.find('.form').simulate('submit', mockEvent)
+      expect(mockEvent.preventDefault).toHaveBeenCalled()
     })
   })
 
@@ -351,6 +359,51 @@ let wrapper;
     it('should call removeNote, which removes the note from the backend', () => {
       wrapper.instance().handleDeleteNote(mockState.id)
       expect(removeNote).toHaveBeenCalledWith(mockState.id)
+    })
+  })
+
+  describe('mapDispatchToProps', () => {
+    it('should delete a note ', () => {
+      let mockId = 1;
+      let mockDispatch = jest.fn()
+      const actionToDispatch = actions.deleteNote(mockId)
+      const mappedProps = mapDispatchToProps(mockDispatch)
+      mappedProps.deleteNote(mockId)
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+    })
+
+    it('should update an existing note', () => {
+      let mockNote = { title: 'mockNote1', id: '1', items: [{}, {}]}
+      let mockDispatch = jest.fn()
+      const actionToDispatch = actions.storeUpdate(mockNote)
+      const mappedProps = mapDispatchToProps(mockDispatch)
+      mappedProps.storeUpdate(mockNote)
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+    })
+
+    it('should store a new note', () => {
+      let mockNote = { title: 'mockNote1', id: '1', items: [{}, {}]}
+      let mockDispatch = jest.fn()
+      const actionToDispatch = actions.storeNote(mockNote)
+      const mappedProps = mapDispatchToProps(mockDispatch)
+      mappedProps.storeNote(mockNote)
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch)
+    })
+  })
+
+  describe('checkKey', () => {
+    it('should prevent default if keyCode is 13', () => {
+      let mockEvent = {keyCode: 13, preventDefault: jest.fn()}
+      wrapper.instance().checkKey(mockEvent)
+
+      expect(mockEvent.preventDefault).toBeCalled()
+    })
+
+    it('should not prevent default if keyCode is not 13', () => {
+      let mockEvent = {keyCode: 11, preventDefault: jest.fn()}
+      wrapper.instance().checkKey(mockEvent)
+
+      expect(mockEvent.preventDefault).not.toHaveBeenCalled()
     })
   })
 })
