@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Route, withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import NoteContainer from '../../components/NoteContainer/NoteContainer'
-import NewNote from '../NewNote/NewNote'
 import { storeSavedNotes } from '../../actions'
 import { getNotes } from '../../helpers/apiCalls'
 import EditNote from '../EditNote/EditNote'
@@ -49,5 +49,10 @@ export const mapStateToProps = (state) => ({
 export const mapDispatchToProps = (dispatch) => ({
   storeSavedNotes: (notes) => dispatch(storeSavedNotes(notes))
 })
+
+App.propTypes = {
+  notes: PropTypes.array,
+  storeSavedNotes: PropTypes.func.isRequired
+}
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import {changeItem} from '../../actions'
+import PropTypes from 'prop-types'
 
 export class EditItem extends Component {
   constructor(props) {
@@ -48,27 +47,33 @@ export class EditItem extends Component {
 
   render() {
     return (
-            <div className='list-container' >
-              <input type='checkbox'
-                      className='list-control'
-                      name='completed'
-                      checked={this.state.completed}
-                      onChange={this.toggleCompleted}
-                      >
-              </input>
-              {
-                this.state.id &&
-                <textarea onKeyUp={this.updateItem}
-                          onKeyDown={this.checkKey}
-                          className="list-item"
-                          defaultValue={this.state.value}
-                          >
-                </textarea>
-              }
-              <button className='list-control delete-item' onClick={this.deleteItem}>X</button>
-            </div>
-         )
-      }
+      <div className='list-container' >
+        <input type='checkbox'
+                className='list-control'
+                name='completed'
+                checked={this.state.completed}
+                onChange={this.toggleCompleted}
+                >
+        </input>
+        {
+          this.state.id &&
+          <textarea onKeyUp={this.updateItem}
+                    onKeyDown={this.checkKey}
+                    className="list-item"
+                    defaultValue={this.state.value}
+                    >
+          </textarea>
+        }
+        <button className='list-control delete-item' onClick={this.deleteItem}>X</button>
+      </div>
+    )
+  }
+}
+
+EditItem.propTypes = {
+  updateNoteItems: PropTypes.func.isRequired,
+  delete: PropTypes.func.isRequired,
+  item: PropTypes.object
 }
 
 export default EditItem;
