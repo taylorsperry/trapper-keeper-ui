@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {changeItem} from '../../actions'
 
@@ -68,6 +69,12 @@ export class EditItem extends Component {
       </div>
     )
   }
+}
+
+EditItem.propTypes = {
+  updateNoteItems: PropTypes.func.isRequired,
+  delete: PropTypes.func.isRequired,
+  item: PropTypes.object
 }
 
 export default EditItem

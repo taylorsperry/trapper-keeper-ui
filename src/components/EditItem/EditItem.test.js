@@ -1,6 +1,6 @@
 import EditItem from './EditItem'
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 describe('EditItem', () => {
   let wrapper
@@ -53,7 +53,7 @@ describe('EditItem', () => {
   })
 
   describe('editItem', () => {
-    it('should be called when a the correct button is clicked', () => {
+    it.only('should be called when a the correct button is clicked', () => {
       const e = Object.assign(jest.fn(), {preventDefault: () => {}})
       
       wrapper.instance().editItem = jest.fn()
@@ -92,12 +92,35 @@ describe('EditItem', () => {
     })
 
     it('should clear state value', () => {
-      
+      const e = Object.assign(jest.fn(), {preventDefault: () => {}})
+      const mockState = {
+        value: 'he',
+        id: 6,
+        completed: false,
+      }
+      const mockEmptyState = {
+        value: '',
+        id: 6,
+        completed: false,
+      }
+
+      wrapper.setState(mockState)
+      wrapper.instance().deleteItem(e)
+      expect(wrapper.state()).toEqual(mockEmptyState)
     })
 
     it('should call delete with the correct id', () => {
-      
-    })
+      const e = Object.assign(jest.fn(), {preventDefault: () => {}})
+      const mockState = {
+        value: 'he',
+        id: 6,
+        completed: false,
+      }
+
+      wrapper.setState(mockState)
+      wrapper.instance().deleteItem(e)
+      expect(wrapper.instance().props.delete).toBeCalledWith(6)
+    }) 
   })
 
   describe('toggleCompleted', () => {

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export const ViewItem = (props) => {
     return(
@@ -9,6 +10,10 @@ export const ViewItem = (props) => {
         </textarea>
       </div>
     )
+}
+
+ViewItem.propTypes = {
+  existingValue: PropTypes.string.isRequired
 }
 
 export default ViewItem

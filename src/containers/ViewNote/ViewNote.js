@@ -1,6 +1,7 @@
 import React from 'react'
-import ViewItem from '../../containers/ViewItem/ViewItem'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import ViewItem from '../../containers/ViewItem/ViewItem'
 
 export const ViewNote = (props) => {
 
@@ -15,6 +16,10 @@ export const ViewNote = (props) => {
       </form>
     </Link>
   )
+}
+
+ViewNote.propTypes = {
+  note: PropTypes.object.isRequired
 }
 
 export default ViewNote
