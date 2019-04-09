@@ -50,11 +50,11 @@ export class EditItem extends Component {
     return (
       <div className='list-container' >
         <input type='checkbox'
-                className='list-control complete-item'
-                name='completed'
-                checked={this.state.completed}
-                onChange={this.toggleCompleted}
-                >
+               className='list-control complete-item'
+               name='completed'
+               checked={this.state.completed}
+               onChange={this.toggleCompleted}
+               >
         </input>
         {
           this.state.id &&

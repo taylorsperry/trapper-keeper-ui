@@ -53,10 +53,9 @@ describe('EditItem', () => {
   })
 
   describe('editItem', () => {
-    it.only('should be called when a the correct button is clicked', () => {
+    it('should be called when the correct button is clicked', () => {
       const e = Object.assign(jest.fn(), {preventDefault: () => {}})
-      
-      wrapper.instance().editItem = jest.fn()
+      jest.spyOn(wrapper.instance(), 'editItem');
       wrapper.find('.confirm-item').simulate('click', e)
       expect(wrapper.instance().editItem).toBeCalled()
     })
@@ -86,6 +85,7 @@ describe('EditItem', () => {
 
   describe('deleteItem', () => {
     it('should be called when the correct button is clicked', () => {
+      jest.spyOn(wrapper.instance(), 'deleteItem');
       const e = Object.assign(jest.fn(), {preventDefault: () => {}})
       wrapper.find('.delete-item').simulate('click', e)
       expect(wrapper.instance().deleteItem).toBeCalled()
