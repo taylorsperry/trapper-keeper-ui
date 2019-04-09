@@ -18,6 +18,7 @@ export class EditNote extends Component {
 
   componentDidMount = () => {
     if(this.props.id) {
+      console.log(this.props)
       this.setState({
         id: this.props.id,
         items: this.props.items,
@@ -41,7 +42,7 @@ export class EditNote extends Component {
     })
   }
 
-  updateState = (newItem, completed) => {
+  updateState = (newItem) => {
     if(this.state.items.length) {
       const updatedItems = this.state.items.map(item => {
         if (item.id == newItem.id) {
@@ -57,26 +58,12 @@ export class EditNote extends Component {
   }
 
   moveCompleted = (completedItem) => {
-    // let newState;
     let newState = this.state.items.map(item => {
       if(item.id == completedItem.id) {
         item = completedItem
       }
       return item
     })
-    // if(completedItem.completed) {
-    //   newState = this.state.items.filter(item => item.id !== completedItem.id)
-    //   newState.push(completedItem)
-    // } else {
-    //   newState = this.state.items.filter(item => item.id !== completedItem.id)
-    //   newState.unshift(completedItem)
-    //   // newState = this.state.items.map(item => {
-    //   //   if(item.id == completedItem.id) {
-    //   //     item = completedItem
-    //   //   }
-    //   //   return item
-    //   // })
-    // }
         this.setState({
           items: newState,
         })
@@ -103,12 +90,12 @@ export class EditNote extends Component {
 
   editNote = async () => {
     const { history } = this.props
-    let newItems = this.state.items.filter(item => item.value)
+    let editedItems = this.state.items.filter(item => item.value)
     this.setState({
-      items: newItems
+      items: editedItems
     })
     const { id, title } = this.state
-    const editedNote = await updateNote({id, title, items: newItems})
+    await updateNote({id, title, items: editedItems})
     this.props.storeUpdate(this.state)
     history.push('/')
   }
@@ -117,7 +104,7 @@ export class EditNote extends Component {
     let newItems = this.state.items.filter(item => item.id !== itemId)
     this.setState({items: newItems})
     const { id, title, items } = this.state
-    const editedNote = await updateNote({id, title, items: newItems})
+    await updateNote({id, title, items: newItems})
     this.props.storeUpdate(id, title, items)
   }
 
@@ -150,42 +137,40 @@ export class EditNote extends Component {
     }
   }                                        
                                  
-    render() {
-      let completeItems
-      let incompleteItems
-      let completeElements
-      let incompleteElements
-      if (this.state.items.length) {
-        completeItems = this.state.items.filter(item => item.completed === true)
-        incompleteItems = this.state.items.filter(item => item.completed === false)
-        completeElements = completeItems.map(item => this.returnItemElement(item))
-        incompleteElements = incompleteItems.map(item => this.returnItemElement(item))
-      }
-
-
+  render() {
+    let completeItems
+    let incompleteItems
+    let completeElements
+    let incompleteElements
+    if (this.state.items.length) {
+      completeItems = this.state.items.filter(item => item.completed === true)
+      incompleteItems = this.state.items.filter(item => item.completed === false)
+      completeElements = completeItems.map(item => this.returnItemElement(item))
+      incompleteElements = incompleteItems.map(item => this.returnItemElement(item))
+    }
 
     return (
       <div className="form-container">
         <form onSubmit={this.handleSubmit}>
-        <input className='title' 
-              onKeyUp={this.handleChange}
-              onKeyDown={this.checkKey}
-              defaultValue={this.state.title}
-              name="title"
-              placeholder='Title'
-              >
-        </input>
+          <input className='title' 
+                onKeyUp={this.handleChange}
+                onKeyDown={this.checkKey}
+                defaultValue={this.state.title}
+                name="title"
+                placeholder='Title'
+                >
+          </input>
           {this.state.items && 
-          <div>
-            {incompleteElements}
-            {completeElements}
-          </div>
+            <div>
+              {incompleteElements}
+              {completeElements}
+            </div>
           }
           <div className="note-controls">
-          <button className="save-note"
-                  onClick={this.addItem}>Add An Item</button>
-          <button className='save-note'>Save Note</button>
-          <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
+            <button className="save-note"
+                    onClick={this.addItem}>Add An Item</button>
+            <button className='save-note'>Save Note</button>
+            <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
           </div>
         </form>
       </div>
