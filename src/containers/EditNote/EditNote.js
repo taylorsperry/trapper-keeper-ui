@@ -19,6 +19,7 @@ export class EditNote extends Component {
 
   componentDidMount = () => {
     if(this.props.id) {
+      console.log(this.props)
       this.setState({
         id: this.props.id,
         items: this.props.items,
@@ -42,9 +43,7 @@ export class EditNote extends Component {
     })
   }
 
-  updateState = (newItem, completed) => {
-    console.log(this.state)
-    console.log(completed)
+  updateState = (newItem) => {
     if(this.state.items.length) {
       const updatedItems = this.state.items.map(item => {
         if (item.id == newItem.id) {
@@ -67,7 +66,6 @@ export class EditNote extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    //either call editNote or sendNote
     if(this.state.new === false) {
       this.editNote()
     } else {
@@ -76,7 +74,6 @@ export class EditNote extends Component {
   }
 
   sendNote = async () => {
-    console.log('fire')
     let { history } = this.props;
     const { title } = this.state
     let items = this.state.items.filter(item => item.value)
@@ -89,12 +86,12 @@ export class EditNote extends Component {
   editNote = async () => {
     
     const { history } = this.props
-    let newItems = this.state.items.filter(item => item.value)
+    let editedItems = this.state.items.filter(item => item.value)
     this.setState({
-      items: newItems
+      items: editedItems
     })
     const { id, title } = this.state
-    const editedNote = await updateNote({id, title, items: newItems})
+    await updateNote({id, title, items: editedItems})
     this.props.storeUpdate(this.state)
     history.push('/')
   }
@@ -103,7 +100,7 @@ export class EditNote extends Component {
     let newItems = this.state.items.filter(item => item.id !== itemId)
     this.setState({items: newItems})
     const { id, title, items } = this.state
-    const editedNote = await updateNote({id, title, items: newItems})
+    await updateNote({id, title, items: newItems})
     this.props.storeUpdate(id, title, items)
   }
 
@@ -115,8 +112,6 @@ export class EditNote extends Component {
   }
 
   render() {
-      
-    console.log(this.state.items)
     return (
       <div className="form-container">
         <form onSubmit={this.handleSubmit}>
