@@ -4,7 +4,7 @@ import {changeItem} from '../../actions'
 
 export class EditItem extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       value: '',
       id: '',
@@ -29,7 +29,7 @@ export class EditItem extends Component {
   editItem = (e) => {
     e.preventDefault()
     if(this.state.value) {
-      this.props.updateItem(this.state)
+      this.props.updateNoteItems(this.state)
     }
   }
 
@@ -46,39 +46,28 @@ export class EditItem extends Component {
   }
 
   render() {
-    let cardValue;
-    console.log(this.state.value)
-    if(this.state.value) {
-      cardValue = this.state.value
-    }
     return (
-            <div className='list-container' >
-              <input type='checkbox'
-                      className='list-control'
-                      name='completed'
-                      checked={this.state.completed}
-                      onChange={this.toggleCompleted}
-                      >
-              </input>
-              {
-                this.state.id &&
-                <textarea onChange={this.updateItem}
-                          className="list-item"
-                          defaultValue={this.state.value}
-                          >
-                </textarea>
-              }
-              <button onClick={this.editItem}>Edit</button>
-              <button className='list-control delete-item' onClick={this.deleteItem}>X</button>
-            </div>
-         )
-      }
+      <div className='list-container' >
+        <input type='checkbox'
+                className='list-control complete-item'
+                name='completed'
+                checked={this.state.completed}
+                onChange={this.toggleCompleted}
+                >
+        </input>
+        {
+          this.state.id &&
+          <textarea onChange={this.updateItem}
+                    className="list-item"
+                    defaultValue={this.state.value}
+                    >
+          </textarea>
+        }
+        <button className='confirm-item' onClick={this.editItem}>Edit</button>
+        <button className='list-control delete-item' onClick={this.deleteItem}>X</button>
+      </div>
+    )
+  }
 }
 
-export default EditItem;
-
-// export const mapDispatchToProps = (dispatch) => ({
-//   changeItem: (item) => dispatch(changeItem(item))
-// })
-
-// export default connect(null, mapDispatchToProps)(EditItem)
+export default EditItem

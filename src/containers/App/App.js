@@ -11,15 +11,18 @@ import './_App.scss'
 export class App extends Component {
   
   componentDidMount = async () => {
-      const allNotes = await getNotes()
-      this.props.storeSavedNotes(allNotes)
+    const allNotes = await getNotes()
+    // if(error) {
+    //   this.props.setError(error.message)
+    // }
+    this.props.storeSavedNotes(allNotes)
   }
 
   findNote = ({ match }) => {
-    console.log(match.params)
-    console.log(this.props.notes)
     const foundNote = this.props.notes.find(note => note.id === match.params.id)
-    console.log(foundNote)
+    if (!foundNote) {
+      return '404 no found note'
+    }
     return <EditNote {...foundNote} />
   }
   

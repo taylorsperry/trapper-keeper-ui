@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import EditItem from '../../components/EditItem/EditItem'
-import NewItem from '../../components/NewItem/NewItem'
 import { addNote, updateNote, removeNote } from '../../helpers/apiCalls'
 import { connect } from 'react-redux'
 import { storeUpdate, deleteNote, storeNote } from '../../actions'
@@ -43,8 +42,6 @@ export class EditNote extends Component {
   }
 
   updateState = (newItem, completed) => {
-    console.log(this.state)
-    console.log(completed)
     if(this.state.items.length) {
       const updatedItems = this.state.items.map(item => {
         if (item.id == newItem.id) {
@@ -67,7 +64,6 @@ export class EditNote extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    //either call editNote or sendNote
     if(this.state.new === false) {
       this.editNote()
     } else {
@@ -76,7 +72,6 @@ export class EditNote extends Component {
   }
 
   sendNote = async () => {
-    console.log('fire')
     let { history } = this.props;
     const { title } = this.state
     let items = this.state.items.filter(item => item.value)
@@ -87,7 +82,6 @@ export class EditNote extends Component {
   }
 
   editNote = async () => {
-    
     const { history } = this.props
     let newItems = this.state.items.filter(item => item.value)
     this.setState({
@@ -115,28 +109,26 @@ export class EditNote extends Component {
   }
 
   render() {
-      
-    console.log(this.state.items)
     return (
       <div className="form-container">
         <form onSubmit={this.handleSubmit}>
-        <input className='title' 
-              onChange={this.handleChange}
-              defaultValue={this.state.title}
-              name="title"
-              placeholder='Title'
-              >
-        </input>
+          <input className='title' 
+                 onChange={this.handleChange}
+                 defaultValue={this.state.title}
+                 name="title"
+                 placeholder='Title'
+                 >
+          </input>
           {this.state.items && 
             this.state.items.map(item => <EditItem {...item} 
-                                        updateItem={this.updateState}
-                                        delete={this.deleteItem}
-                                        key={item.id}
-                                      /> )
+                                          updateNoteItems={this.updateState}
+                                          delete={this.deleteItem}
+                                          key={item.id}
+                                          /> )
           }
           <div className="note-controls">
-          <button className='save-note'>Update</button>
-          <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
+            <button className='save-note'>Update</button>
+            <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
           </div>
         </form>
       </div>
@@ -150,4 +142,4 @@ export const mapDispatchToProps = (dispatch) => ({
   storeNote: (note) => dispatch(storeNote(note))
 })
 
-export default withRouter(connect(null, mapDispatchToProps)(EditNote));
+export default withRouter(connect(null, mapDispatchToProps)(EditNote))

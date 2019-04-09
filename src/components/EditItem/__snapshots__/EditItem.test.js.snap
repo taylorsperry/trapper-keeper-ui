@@ -1,11 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NewItem should match the snapshot 1`] = `
+exports[`EditItem should match the snapshot 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <NewItem
+  Symbol(enzyme.__unrendered__): <EditItem
+    completed={false}
     handleChange={[MockFunction]}
     handleItem={[MockFunction]}
+    id="123"
+    updateNoteItems={[MockFunction]}
+    value="test"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -22,19 +26,27 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [
-        <button
+        <input
+          checked={false}
           className="list-control"
+          name="completed"
+          onChange={[Function]}
+          type="checkbox"
         />,
         <textarea
           className="list-item"
-          name="listText"
-          onBlur={[Function]}
+          defaultValue="test"
           onChange={[Function]}
-          placeholder="Add an item . . ."
-          value=""
         />,
         <button
+          className="confirm-item"
+          onClick={[Function]}
+        >
+          Edit
+        </button>,
+        <button
           className="list-control delete-item"
+          onClick={[Function]}
         >
           X
         </button>,
@@ -48,11 +60,15 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
+          "checked": false,
           "className": "list-control",
+          "name": "completed",
+          "onChange": [Function],
+          "type": "checkbox",
         },
         "ref": null,
         "rendered": null,
-        "type": "button",
+        "type": "input",
       },
       Object {
         "instance": null,
@@ -60,11 +76,8 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "className": "list-item",
-          "name": "listText",
-          "onBlur": [Function],
+          "defaultValue": "test",
           "onChange": [Function],
-          "placeholder": "Add an item . . .",
-          "value": "",
         },
         "ref": null,
         "rendered": null,
@@ -75,8 +88,22 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
+          "children": "Edit",
+          "className": "confirm-item",
+          "onClick": [Function],
+        },
+        "ref": null,
+        "rendered": "Edit",
+        "type": "button",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
           "children": "X",
           "className": "list-control delete-item",
+          "onClick": [Function],
         },
         "ref": null,
         "rendered": "X",
@@ -92,19 +119,27 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [
-          <button
+          <input
+            checked={false}
             className="list-control"
+            name="completed"
+            onChange={[Function]}
+            type="checkbox"
           />,
           <textarea
             className="list-item"
-            name="listText"
-            onBlur={[Function]}
+            defaultValue="test"
             onChange={[Function]}
-            placeholder="Add an item . . ."
-            value=""
           />,
           <button
+            className="confirm-item"
+            onClick={[Function]}
+          >
+            Edit
+          </button>,
+          <button
             className="list-control delete-item"
+            onClick={[Function]}
           >
             X
           </button>,
@@ -118,11 +153,15 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
+            "checked": false,
             "className": "list-control",
+            "name": "completed",
+            "onChange": [Function],
+            "type": "checkbox",
           },
           "ref": null,
           "rendered": null,
-          "type": "button",
+          "type": "input",
         },
         Object {
           "instance": null,
@@ -130,11 +169,8 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "className": "list-item",
-            "name": "listText",
-            "onBlur": [Function],
+            "defaultValue": "test",
             "onChange": [Function],
-            "placeholder": "Add an item . . .",
-            "value": "",
           },
           "ref": null,
           "rendered": null,
@@ -145,8 +181,22 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "host",
           "props": Object {
+            "children": "Edit",
+            "className": "confirm-item",
+            "onClick": [Function],
+          },
+          "ref": null,
+          "rendered": "Edit",
+          "type": "button",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
             "children": "X",
             "className": "list-control delete-item",
+            "onClick": [Function],
           },
           "ref": null,
           "rendered": "X",
