@@ -109,7 +109,22 @@ export class EditNote extends Component {
     history.push('/')
   }
 
+  returnItemElement = (item) => <EditItem {...item} 
+                                            updateNoteItems={this.updateState}
+                                            delete={this.deleteItem}
+                                            key={item.id}
+                                            />
   render() {
+    let completeItems
+    let incompleteItems
+    let completeElements
+    let incompleteElements
+    if (this.state.items.length) {
+      completeItems = this.state.items.filter(item => item.completed === true)
+      incompleteItems = this.state.items.filter(item => item.completed === false)
+      completeElements = completeItems.map(item => this.returnItemElement(item))
+      incompleteElements = incompleteItems.map(item => this.returnItemElement(item))
+    }
     return (
       <div className="form-container">
         <form onSubmit={this.handleSubmit}>
@@ -121,11 +136,10 @@ export class EditNote extends Component {
                  >
           </input>
           {this.state.items && 
-            this.state.items.map(item => <EditItem {...item} 
-                                          updateNoteItems={this.updateState}
-                                          delete={this.deleteItem}
-                                          key={item.id}
-                                          /> )
+            <div>
+              {incompleteElements}
+              {completeElements}
+            </div>
           }
           <div className="note-controls">
             <button className='save-note'>Update</button>

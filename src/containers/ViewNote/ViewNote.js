@@ -6,13 +6,17 @@ import ViewItem from '../../containers/ViewItem/ViewItem'
 export const ViewNote = (props) => {
 
   let { title, items, id } = props.note
-  let existingItems = items.map(item => <ViewItem key={item.id} existingValue={item.value} />)
+  let incompleteItems = items.filter(item => item.completed === false)
+  let incompleteElements = incompleteItems.map(item => <ViewItem key={item.id} existingValue={item.value} />)
+  let completeItems = items.filter(item => item.completed === true)
+  let completeElements = completeItems.map(item => <ViewItem key={item.id} existingValue={item.value} />)
   
   return(
     <Link to={`/notes/${id}`}>
       <form>
         <p>{title}</p>
-        {existingItems}
+        {incompleteElements}
+        {completeElements}
       </form>
     </Link>
   )
