@@ -25,7 +25,6 @@ export class EditItem extends Component {
       value: e.target.value
     }, () => {this.props.updateItem(this.state)})
     if(e.key === 'Enter') {
-      console.log('booop')
       this.props.handleSubmit(e)
     }
   }

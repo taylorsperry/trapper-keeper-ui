@@ -40,6 +40,9 @@ export class EditNote extends Component {
     this.setState({
       [e.target.name] : e.target.value
     })
+    if(e.key === 'Enter') {
+      this.handleSubmit(e)
+    }
   }
 
   updateState = (newItem, completed) => {
@@ -51,7 +54,6 @@ export class EditNote extends Component {
         return item
       })
       let index = updatedItems.indexOf(newItem)
-      
         this.setState({
           items: updatedItems
         })
@@ -146,7 +148,7 @@ export class EditNote extends Component {
       <div className="form-container">
         <form onSubmit={this.handleSubmit}>
         <input className='title' 
-              onChange={this.handleChange}
+              onKeyDown={this.handleChange}
               defaultValue={this.state.title}
               name="title"
               placeholder='Title'
