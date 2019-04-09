@@ -47,11 +47,6 @@ export class EditItem extends Component {
   }
 
   render() {
-    let cardValue;
-    console.log(this.state.value)
-    if(this.state.value) {
-      cardValue = this.state.value
-    }
     return (
             <div className='list-container' >
               <input type='checkbox'

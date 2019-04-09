@@ -38,7 +38,7 @@ export class App extends Component {
           </Link>
         </header>
         <Route exact path='/' component= { () => <NoteContainer notes={this.props.notes} /> } />
-        <Route path='/new-note' component={ NewNote } />
+        <Route path='/new-note' component={ () => <EditNote />} />
         <Route path='/notes/:id' render={this.findNote} />
       </div>
     )
