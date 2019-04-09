@@ -1,5 +1,5 @@
-import {addNote} from './apiCalls'
-import {mockNote, mockErrorNote} from './mockData'
+import {addNote, getNotes, updateNote} from './apiCalls'
+import {mockNote, mockNoteWithoutTitle, mockNoteWithoutItems, mockEmptyNote, mockAllNotes } from './mockData'
 
 describe('apiCalls', () => {
 
@@ -12,24 +12,79 @@ describe('apiCalls', () => {
       }))
       const newNote = await addNote(mockNote)
       expect(window.fetch).toHaveBeenCalled()
-
+    
       expect(newNote).toEqual(mockNote)
     })
 
-    it('should return an error message note was unable to be added', async () => {
-      window.fetch = jest.fn().mockImplementation(() => Promise.reject(
-        new Error('Missing title')
+    it('should return an error message if note is missing a title', async () => {
+      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+          ok: false,
+          status: 422,
+          json: () => Promise.resolve('Missing title')
+        }
       ))
-      await expect(addNote(mockErrorNote)).resolves.toBe('Missing title')
+      const result = await addNote(mockNoteWithoutTitle)
+      expect(result).toEqual('Missing title')
+    })
+
+    it('should return an error message if note has no items', async () => {
+      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+        ok: false, 
+        status: 422,
+        json: () => Promise.resolve('Missing list')
+      }))
+      const result = await addNote(mockNoteWithoutItems)
+      expect(result).toEqual('Missing list')
+    })
+
+    it ('should return an error message if note has no title or items', async () => {
+      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+        ok: false, 
+        status: 422,
+        json: () => Promise.resolve('Missing title and list')
+      }))
+      const result = await addNote(mockEmptyNote)
+      expect(result).toEqual('Missing title and list')
     })
   })
 
   describe('getNotes', () => {
-    it('should call fetch and return the requested notes', () => {
-
-    })
-    it('should return an error message if notes were unable to be added', () => {
+    
+    it('should call fetch and return all notes', async () => {
+      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+        ok: true,
+        status: 200,
+        json: () => Promise.resolve(mockAllNotes)
+      }))
       
+      const response = await getNotes()
+      expect(window.fetch).toHaveBeenCalled()
+      
+      await expect(response).toEqual(mockAllNotes.notes)
+    })
+  })
+
+  describe('updateNote', () => {
+
+    let updatedNote = {
+      id: 2,
+      title: 'updatedTitle',
+      items: [
+        {id: '123', value: 'first'},
+        {id: '234', value: 'second'},
+        {id: '345', value: 'third'}
+      ]
+    }
+
+    it('should return an updated note', async () => {
+      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+        ok: true,
+        status: 200,
+        json: () => Promise.resolve(updatedNote)
+        }
+      ))
+      const expected = await updateNote(mockNote)
+      expect(expected).toEqual(updatedNote)
     })
   })
 
