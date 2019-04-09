@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ViewNote from '../../containers/ViewNote/ViewNote'
+import ViewNote from '../ViewNote/ViewNote'
 
 export const NoteContainer = (props) => {
   // console.log(props.notes)

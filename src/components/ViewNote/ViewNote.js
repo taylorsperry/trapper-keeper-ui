@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ViewItem from '../../containers/ViewItem/ViewItem'
+import ViewItem from '../ViewItem/ViewItem'
 import { Link } from 'react-router-dom'
 
 export const ViewNote = (props) => {
