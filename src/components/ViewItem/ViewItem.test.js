@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import { mockNote } from '../../helpers/mockData'
 
 describe('ViewItem', () => {
-  let wrapper;
+  let wrapper
   it('should match snapshot', () => {
     wrapper = shallow(
       <ViewItem {...mockNote.items[0].value}/>

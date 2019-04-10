@@ -4,7 +4,6 @@ import ViewItem from '../ViewItem/ViewItem'
 import { Link } from 'react-router-dom'
 
 export const ViewNote = (props) => {
-
   let { title, items, id } = props.note
   let incompleteItems = items.filter(item => item.completed === false)
   let incompleteElements = incompleteItems.map(item => <ViewItem key={item.id} existingValue={item.value} complete='false' />)

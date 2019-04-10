@@ -4,7 +4,7 @@ import { mockAllNotes } from '../../helpers/mockData'
 import { shallow } from 'enzyme'
 
 describe('NoteContainer', () => {
-  let wrapper;
+  let wrapper
 
   it('should match snapshot', () => {
     wrapper = shallow(
