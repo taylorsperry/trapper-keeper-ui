@@ -60,6 +60,7 @@ export class EditItem extends Component {
                     onKeyDown={this.checkKey}
                     className="list-item"
                     defaultValue={this.state.value}
+                    placeholder='Add an item . . .'
                     >
           </textarea>
         }
