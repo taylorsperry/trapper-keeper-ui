@@ -160,7 +160,7 @@ export class EditNote extends Component {
                 onKeyDown={this.checkKey}
                 defaultValue={this.state.title}
                 name="title"
-                placeholder='Title'
+                placeholder='Title . . .'
                 >
           </input>
           {this.state.items && 
