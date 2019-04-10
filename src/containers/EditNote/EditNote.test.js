@@ -351,6 +351,12 @@ let wrapper;
       wrapper.setState(mockState)
     })
 
+    it('should call handleDeleteNote on click', () => {
+      wrapper.instance().handleDeleteNote = jest.fn()
+      wrapper.find('.delete-note').simulate('click')
+      expect(wrapper.instance().handleDeleteNote).toHaveBeenCalled()
+    })
+
     it('should call deleteNote, which removes the note from the store', () => {
       wrapper.instance().handleDeleteNote(mockState.id)
       expect(wrapper.instance().props.deleteNote).toHaveBeenCalledWith(mockState.id)
@@ -404,6 +410,24 @@ let wrapper;
       wrapper.instance().checkKey(mockEvent)
 
       expect(mockEvent.preventDefault).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('addItem', () => {
+    it('should update state with an empty item', () => {
+      wrapper.setState({items: [ {id: 7, value: 'list item', completed: false} ]})
+      let mockEvent = {preventDefault: jest.fn()}
+      wrapper.instance().addItem(mockEvent)
+      expect(wrapper.state('items')).toEqual([ {id: 7, value: 'list item', completed: false}, {value: '', id: Date.now(), completed: false} ])
+    })
+  })
+
+  describe('moveCompleted', () => {
+    it('should update the completed property of an item', () => {
+      let mockItem = {id: 7, value: 'list item', completed: true}
+      wrapper.setState({items: [ {id: 7, value: 'list item', completed: false} ]})
+      wrapper.instance().moveCompleted(mockItem)
+      expect(wrapper.state('items')).toEqual([mockItem])
     })
   })
 })

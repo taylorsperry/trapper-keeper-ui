@@ -41,7 +41,7 @@ ShallowWrapper {
           placeholder="Add an item . . ."
         />,
         <button
-          className="list-control"
+          className="list-control delete"
           onClick={[Function]}
         >
           <i
@@ -91,7 +91,7 @@ ShallowWrapper {
           "children": <i
             class="fas fa-minus-circle delete-item"
           />,
-          "className": "list-control",
+          "className": "list-control delete",
           "onClick": [Function],
         },
         "ref": null,
@@ -133,7 +133,7 @@ ShallowWrapper {
             placeholder="Add an item . . ."
           />,
           <button
-            className="list-control"
+            className="list-control delete"
             onClick={[Function]}
           >
             <i
@@ -183,7 +183,7 @@ ShallowWrapper {
             "children": <i
               class="fas fa-minus-circle delete-item"
             />,
-            "className": "list-control",
+            "className": "list-control delete",
             "onClick": [Function],
           },
           "ref": null,
