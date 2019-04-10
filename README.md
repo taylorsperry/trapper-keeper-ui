@@ -1,89 +1,35 @@
-Template for DTR Memo
+# Trapper Keeper
 
-### Project:
+### A web-based note-taking application.
 
-#### Group Member Names: Mason France, Edgar Munoz, Taylor Sperry
+## Installation Steps
 
-#### Goals and Expectations for the Project (What does each group member hope to get out of this project? What do we want to achieve as a team? How will we know that we're successful?):
+```git clone https://github.com/francepack/trapper-keeper-ui.git```
 
--Taylor: Feel more confident w/testing. Be more conscientious about TDD. Learn Thunks.
+```npm install```
 
--Mason: Feel good about finished product, all facets touched on
+```npm start```
 
--Edgar: Have completed project w/at least 50 tests passing. I want to help everyone learn at something they feel weakest at.
+## About the project
 
-#### Team strengths & collaboration styles (consider discussing your Pairin qualities here):
+Trapper Keeper is a project based on the Google Keep application. It allows users to create new notes with titles and dynamic list items, and to view and edit the notes they've created. The goals of this project were to continue to improve on building client-side applications using react, redux, and react router; to practice creating a dynamic form UI; and to learn to build our own API using node and express. Trapper Keeper also implements a Jest/Enzyme test-suite and Sass styling.
 
--Taylor: Can f**king crank, Start w/d+n and then phasing into delegation
+## Tech Stack
 
--Mason: Strategic thinker, good ideas, likes focused tasks. Consensus based.
+- ReactJS
+- Redux
+- React Router
+- Node/Express
+- Jest/Enzyme
+- Sass
 
--Edgar: Focused research, Flexible
+## Wireframe
 
-#### How we can use our strengths to overcome obstacles:
+<img width="850" alt="Screen Shot 2019-04-09 at 10 52 26 PM" src="https://user-images.githubusercontent.com/43555476/55852446-4ff14500-5b1a-11e9-8cd2-786e84096f61.png">
+<img width="851" alt="Screen Shot 2019-04-09 at 10 52 57 PM" src="https://user-images.githubusercontent.com/43555476/55852450-52ec3580-5b1a-11e9-928c-3d7aef75fb83.png">
 
-Taylor: Staying focused
+## Contributing Partners
+[Mason France](https://github.com/francepack),
+[Edgar Munoz](https://github.com/criteriamor),
+[Taylor Sperry](https://github.com/taylorsperry)
 
-Mason: Github issues
-
-Edgar: Redux/React console
-
-#### Schedule Expectations (When are we available to work together and individually? What constraints do we have?):
-
-Taylor: Open
-
-Mason: Rehearsals Sunday nights
-
-Edgar: Available
-
-#### Communication Expectations (How and often will we communicate? How do we keep lines of communication open? How will we make decisions as a team?):
-
-Taylor: Slack, Use communication for team-based problem-solving
-
-Mason: Slack Call/Screen Share?, will try to reach out more
-
-Edgar: Available on slack, other mediums on ask
-
-#### Abilities & Growth Expectations (Technical strengths and areas for desired improvement):
-
-Taylor: Testing, Thunks, Demystify Backend
-
-Mason: Thunks, 
-
-Edgar: Streamline implementation of a React/Redux/Router/Testing project w/Thunks
-
-#### Workload Expectations (What features do we each want to work on?):
-
-Taylor: Everyone has a hand in each part
-
-Mason: Delegation/Cooperation through intentional planning + consistency
-
-Edgar: Expect to work a lot. Doesn’t want to fizzle out towards tail-end. 
-
-#### Workflow Expectations (Git workflow/Tools/Code Review/Reviewing Pull Requests/Debugging and Problem-solving Techniques):
-
-Taylor: communicative of pull requests content
-
-Mason: more meticulous branching
-
-Edgar: micro-commits, issues, (checkpoints), show team how to use vscode for commits
-
-#### Expectations for giving and receiving feedback:
-
-Taylor: nicely tell her she’s being grouchy
-
-Mason: supportive, gentle nudging
-
-Edgar: not personal(for me)
-
-#### Project management tools we will use:
-
-Issues, checkpoints, google doc/trello for tracking and planning
-
-#### Day 1 Agenda: 
-
-Edgar: Research, prep
-
-Taylor: Initial setup, some pseudo coding
-
-#### Additional Notes: Don’t push to master (unless all are present), pair w/mod 4, ask classmates for help

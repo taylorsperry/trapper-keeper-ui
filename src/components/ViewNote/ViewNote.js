@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom'
 export const ViewNote = (props) => {
   let { title, items, id } = props.note
   let incompleteItems = items.filter(item => item.completed === false)
-  let incompleteElements = incompleteItems.map(item => <ViewItem key={item.id} existingValue={item.value} />)
+  let incompleteElements = incompleteItems.map(item => <ViewItem key={item.id} existingValue={item.value} complete='false' />)
   let completeItems = items.filter(item => item.completed === true)
-  let completeElements = completeItems.map(item => <ViewItem key={item.id} existingValue={item.value} />)
-
+  let completeElements = completeItems.map(item => <ViewItem key={item.id} existingValue={item.value} complete='true'/>)
+  
   return(
-    <form>
+    <form className='view-note'>
       <Link to={`/notes/${id}`}>
-        <p>{title}</p>
+        <p className='title'>{title}</p>
         {incompleteElements}
         {completeElements}
       </Link>

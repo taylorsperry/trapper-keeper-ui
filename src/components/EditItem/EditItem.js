@@ -47,23 +47,24 @@ export class EditItem extends Component {
   render() {
     return (
       <div className='list-container' >
-        <input type='checkbox'
-                className='list-control complete-item'
-                name='completed'
-                checked={this.state.completed}
-                onChange={this.toggleCompleted}
-                >
-        </input>
+          <input type='checkbox'
+                  className='list-control complete-item'
+                  name='completed'
+                  checked={this.state.completed}
+                  onChange={this.toggleCompleted}
+                  >
+          </input>
         {
           this.state.id &&
           <textarea onKeyUp={this.updateItem}
                     onKeyDown={this.checkKey}
                     className='list-item'
                     defaultValue={this.state.value}
+                    placeholder='Add an item . . .'
                     >
           </textarea>
         }
-        <button className='list-control delete-item' onClick={this.deleteItem}>X</button>
+        <button className='list-control' onClick={this.deleteItem}><i class="fas fa-minus-circle delete-item"></i></button>
       </div>
     )
   }

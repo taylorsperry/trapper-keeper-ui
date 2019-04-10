@@ -177,7 +177,7 @@ export class EditNote extends Component {
                 onKeyDown={this.checkKey}
                 defaultValue={this.state.title}
                 name='title'
-                placeholder='Title'
+                placeholder='Title . . .'
                 >
           </input>
           {this.state.items && 
@@ -190,7 +190,7 @@ export class EditNote extends Component {
             <button className='save-note'
                     onClick={this.addItem}>Add An Item</button>
             <button className='save-note save'>Save Note</button>
-            <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
+            <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>Delete Note</button>
           </div>
         </form>
       </div>
