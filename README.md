@@ -1,6 +1,6 @@
 # Trapper Keeper
 
-### A web-based note-taking application.
+A web-based note-taking application.
 
 ## Installation Steps
 
