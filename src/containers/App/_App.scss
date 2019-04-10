@@ -68,6 +68,12 @@ i {
   justify-content: center;
 }
 
+input:focus,
+button:focus, 
+textarea:focus {
+  outline: none;
+}
+
 .no-notes {
   margin-right: 20px;
   text-align: right;
