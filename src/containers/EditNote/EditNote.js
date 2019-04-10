@@ -26,6 +26,7 @@ export class EditNote extends Component {
       })
     } else {
       this.setState({
+        id: Date.now(),
         items: [{
           id: Date.now(),
           value: '',
@@ -118,13 +119,6 @@ export class EditNote extends Component {
   deleteItem = async (itemId) => {
     let newItems = this.state.items.filter(item => item.id !== itemId)
     this.setState({items: newItems})
-    const { id, title, items } = this.state
-    try {
-      await updateNote({id, title, items: newItems})
-      this.props.storeUpdate(id, title, items)
-    } catch(error) {
-      return error.message
-    }
   }
 
   handleDeleteNote = (id) => {

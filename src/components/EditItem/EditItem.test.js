@@ -55,7 +55,7 @@ describe('EditItem', () => {
   describe('deleteItem', () => {
     it('should be called when the correct button is clicked', () => {
       let mockEvent = { preventDefault: jest.fn() }
-      wrapper.find('.delete-item').simulate('click', mockEvent)
+      wrapper.find('.delete').simulate('click', mockEvent)
       expect(wrapper.instance().props.delete).toHaveBeenCalled()
     })
 
