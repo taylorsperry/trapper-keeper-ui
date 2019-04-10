@@ -32,7 +32,7 @@ describe('App', () => {
 
   describe('componentDidMount', () => {
     it('should collect allNotes upon mount', async () => {
-      wrapper.instance().componentDidMount();
+      wrapper.instance().componentDidMount()
       await expect(getNotes).toHaveBeenCalled()
       expect(storeSavedNotes).toHaveBeenCalledWith(mockNotes)
     })

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 export class EditItem extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       value: '',
       id: '',
@@ -26,7 +26,7 @@ export class EditItem extends Component {
   }
 
   checkKey = (e) => {
-    if(e.keyCode == 13) {
+    if(e.keyCode === 13) {
       e.preventDefault()
     }
   }
@@ -58,7 +58,7 @@ export class EditItem extends Component {
           this.state.id &&
           <textarea onKeyUp={this.updateItem}
                     onKeyDown={this.checkKey}
-                    className="list-item"
+                    className='list-item'
                     defaultValue={this.state.value}
                     >
           </textarea>
@@ -75,4 +75,4 @@ EditItem.propTypes = {
   item: PropTypes.object
 }
 
-export default EditItem;
+export default EditItem

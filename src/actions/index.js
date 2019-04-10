@@ -22,20 +22,3 @@ export const changeItem = (item) => ({
   type: 'CHANGE_ITEM',
   item
 })
-
-// ACTION IDEAS
-
-// Action to mark item as complete? I think this would 'move' the item to back of array
-// export const completeItem = () => {}
-
-// Action to remove a list item?
-// export const deleteItem = () => {}
-
-// export const isLoading = (bool) => ({
-//   type: 'IS_LOADING',
-// })
-
-
-// export const hasError = () => ({
-//   type: 'HAS_ERROR',
-// })

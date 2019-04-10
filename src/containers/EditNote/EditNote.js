@@ -8,7 +8,7 @@ import { storeUpdate, deleteNote, storeNote } from '../../actions'
 
 export class EditNote extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       id: '',
       items: [],
@@ -18,7 +18,7 @@ export class EditNote extends Component {
   }
 
   componentDidMount = () => {
-    if(this.props.id) {
+    if (this.props.id) {
       this.setState({
         id: this.props.id,
         items: this.props.items,
@@ -45,28 +45,27 @@ export class EditNote extends Component {
   updateState = (newItem) => {
     if(this.state.items.length) {
       const updatedItems = this.state.items.map(item => {
-        if (item.id == newItem.id) {
+        if (item.id === newItem.id) {
           item = newItem
         }
         return item
       })
-        this.setState({
-          items: updatedItems
-        })
-      
+      this.setState({
+        items: updatedItems
+      })
     }
   }
 
   moveCompleted = (completedItem) => {
     let newState = this.state.items.map(item => {
-      if(item.id == completedItem.id) {
+      if(item.id === completedItem.id) {
         item = completedItem
       }
       return item
     })
-        this.setState({
-          items: newState,
-        })
+    this.setState({
+      items: newState,
+    })
   }
 
   handleSubmit = (e) => {
@@ -79,17 +78,21 @@ export class EditNote extends Component {
   }
 
   sendNote = async () => {
-    let { history } = this.props;
+    let { history } = this.props
     const { title } = this.state
     let items = this.state.items.filter(item => item.value)
     const note = {title, items}
-    try {
-      const newNote = await addNote(note)
-      this.props.storeNote(newNote)
-    } catch(error) {
-      return error.message
+    if (title && items.length) {
+      try {
+        const newNote = await addNote(note)
+        this.props.storeNote(newNote)
+        history.push('/')
+      } catch(error) {
+        return error.message
+      }
+    } else {
+      alert('Please enter a title and a list.')
     }
-    history.push('/')
   }
 
   editNote = async () => {
@@ -98,18 +101,30 @@ export class EditNote extends Component {
     this.setState({
       items: editedItems
     })
-    const { id, title } = this.state
-    await updateNote({id, title, items: editedItems})
-    this.props.storeUpdate(this.state)
-    history.push('/')
+    const { id, title, items } = this.state
+    if (title && items.length) {
+      try {
+        await updateNote({id, title, items: editedItems})
+        this.props.storeUpdate(this.state)
+        history.push('/')
+      } catch(error) {
+        return error.message
+      }
+    } else {
+      alert('Please enter a title and a list.')
+    }
   }
 
   deleteItem = async (itemId) => {
     let newItems = this.state.items.filter(item => item.id !== itemId)
     this.setState({items: newItems})
     const { id, title, items } = this.state
-    await updateNote({id, title, items: newItems})
-    this.props.storeUpdate(id, title, items)
+    try {
+      await updateNote({id, title, items: newItems})
+      this.props.storeUpdate(id, title, items)
+    } catch(error) {
+      return error.message
+    }
   }
 
   handleDeleteNote = (id) => {
@@ -127,15 +142,17 @@ export class EditNote extends Component {
     })
   }
 
-  returnItemElement = (item) => <EditItem {...item} 
-                                            updateItem={this.updateState}
-                                            delete={this.deleteItem}
-                                            key={item.id}
-                                            moveCompleted={this.moveCompleted}
-                                            />
+  returnItemElement = (item) => (
+    <EditItem {...item} 
+              updateItem={this.updateState}
+              delete={this.deleteItem}
+              key={item.id}
+              moveCompleted={this.moveCompleted}
+              />
+    )
 
   checkKey = (e) => {
-    if(e.keyCode == 13) {
+    if(e.keyCode === 13) {
       e.preventDefault()
     }
   }                                        
@@ -153,13 +170,13 @@ export class EditNote extends Component {
     }
 
     return (
-      <div className="form-container">
-        <form className="form" onSubmit={this.handleSubmit}>
+      <div className='form-container'>
+        <form className='form' onSubmit={this.handleSubmit}>
           <input className='title' 
                 onKeyUp={this.handleChange}
                 onKeyDown={this.checkKey}
                 defaultValue={this.state.title}
-                name="title"
+                name='title'
                 placeholder='Title'
                 >
           </input>
@@ -169,8 +186,8 @@ export class EditNote extends Component {
               {completeElements}
             </div>
           }
-          <div className="note-controls">
-            <button className="save-note"
+          <div className='note-controls'>
+            <button className='save-note'
                     onClick={this.addItem}>Add An Item</button>
             <button className='save-note save'>Save Note</button>
             <button className='delete-note' onClick={() => this.handleDeleteNote(this.state.id)}>X</button>
@@ -195,4 +212,4 @@ EditNote.propTypes = {
 }
 
 
-export default withRouter(connect(null, mapDispatchToProps)(EditNote));
+export default withRouter(connect(null, mapDispatchToProps)(EditNote))
