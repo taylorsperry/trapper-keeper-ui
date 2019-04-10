@@ -30,6 +30,6 @@
 
 ## Contributing Partners
 [Mason France](https://github.com/francepack)
-[Edgar Munoz] (https://github.com/criteriamor)
+[Edgar Munoz](https://github.com/criteriamor)
 [Taylor Sperry](https://github.com/taylorsperry)
 
