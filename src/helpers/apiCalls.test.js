@@ -88,9 +88,12 @@ describe('apiCalls', () => {
     })
 
     it('should return an error if missing title or list', async () => {
-      window.fetch = jest.fn().mockImplementation(() => Promise.reject(response.json()))
-        const expected = await updateNote(mockEmptyNotes)
-        expect(expected).toEqual('Missing title and list')
+      window.fetch = jest.fn(() => { return Promise.reject('Missing title and list')})
+        try {
+          await updateNote(mockEmptyNotes)
+        } catch (error) {
+          expect(error).toEqual('Missing title and list')
+        }
     })
   })
 
