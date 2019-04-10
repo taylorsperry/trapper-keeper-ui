@@ -19,7 +19,7 @@ let wrapper;
   it('should update state for a new note', () => {
     
     let defaultState = {
-      id: '',
+      id: 6,
       items: [
         {
           id: Date.now(),
