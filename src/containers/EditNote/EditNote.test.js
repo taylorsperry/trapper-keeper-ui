@@ -78,7 +78,7 @@ let wrapper;
 
   describe('updateState', () => {
     let mockState;
-
+    let mockItem;
     beforeEach(() => {
       mockState = {
         id: 18,
@@ -91,20 +91,29 @@ let wrapper;
     })
 
     it('should update an item in state if the passed item matches its id', () => {
-      let mockItem = { id: 7, value: 'updated list item', completed: false }
+      mockItem = { id: 7, value: 'updated list item', completed: false }
 
       wrapper.instance().updateState(mockItem)
-
-      expect(wrapper.state().items[0]).toEqual(mockItem)
+      expect(wrapper.state('items').length).toEqual(1)
+      expect(wrapper.state().items).toEqual([mockItem])
     })
 
-    it.skip('should add an item with no value to state if the passed item is the last item in the array in state', () => {
-      let mockItem = { id: 7, value: 'updated list item', completed: false }
-      
-      let expectedState = [{ id: 7, value: 'updated list item', completed: false }, {id: 6, value: '', completed: false }]
-
+    it('should not update state if items array is empty', () => {
+      mockState = {
+        id: 18,
+        items: [],
+        title: 'new title',
+        new: false,
+      }
+      wrapper.setState(mockState)
       wrapper.instance().updateState(mockItem)
-      expect(wrapper.state().items).toEqual(expectedState)
+      expect(wrapper.state().items).toEqual([])
+    })
+
+    it('should return the same items array if passed in item doesnt exist', () => {
+      mockItem = { id: 4, value: 'updated list item', completed: false }
+      wrapper.instance().updateState(mockItem)
+      expect(wrapper.state().items).toEqual(mockState.items)
     })
   })
 
@@ -428,6 +437,13 @@ let wrapper;
       wrapper.setState({items: [ {id: 7, value: 'list item', completed: false} ]})
       wrapper.instance().moveCompleted(mockItem)
       expect(wrapper.state('items')).toEqual([mockItem])
+    })
+
+    it('should not change state if item doesnt match any params', () => {
+      let mockItem = {id: 8, value: 'list item', completed: true}
+      wrapper.setState({items: [ {id: 7, value: 'list item', completed: false} ]})
+      wrapper.instance().moveCompleted(mockItem)
+      expect(wrapper.state('items')).toEqual([{id: 7, value: 'list item', completed: false}])
     })
   })
 })
