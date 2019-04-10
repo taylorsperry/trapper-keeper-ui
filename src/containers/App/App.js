@@ -41,7 +41,6 @@ export class App extends Component {
             <button className='new-note'>New Note</button>
           </Link>
         </header>
-        {!this.props.notes.length && <p className='no-notes'>Create a note<i class='fas fa-arrow-up'></i></p>}
         <Route exact path='/' component= { () => <NoteContainer notes={this.props.notes} /> } />
         <Route path='/new-note' component={ () => <EditNote />} />
         <Route path='/notes/:id' render={this.findNote} />

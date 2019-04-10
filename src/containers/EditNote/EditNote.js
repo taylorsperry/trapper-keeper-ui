@@ -116,7 +116,7 @@ export class EditNote extends Component {
     }
   }
 
-  deleteItem = async (itemId) => {
+  deleteItem = (itemId) => {
     let newItems = this.state.items.filter(item => item.id !== itemId)
     this.setState({items: newItems})
   }
