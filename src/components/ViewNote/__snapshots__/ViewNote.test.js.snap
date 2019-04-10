@@ -42,10 +42,13 @@ ShallowWrapper {
       "children": <Link
         to="/notes/2"
       >
-        <p>
+        <p
+          className="title"
+        >
           mockTitle
         </p>
       </Link>,
+      "className": "view-note",
     },
     "ref": null,
     "rendered": Object {
@@ -54,7 +57,9 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <p>
+          <p
+            className="title"
+          >
             mockTitle
           </p>,
           Array [],
@@ -70,6 +75,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": "mockTitle",
+            "className": "title",
           },
           "ref": null,
           "rendered": "mockTitle",
@@ -89,10 +95,13 @@ ShallowWrapper {
         "children": <Link
           to="/notes/2"
         >
-          <p>
+          <p
+            className="title"
+          >
             mockTitle
           </p>
         </Link>,
+        "className": "view-note",
       },
       "ref": null,
       "rendered": Object {
@@ -101,7 +110,9 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <p>
+            <p
+              className="title"
+            >
               mockTitle
             </p>,
             Array [],
@@ -117,6 +128,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": "mockTitle",
+              "className": "title",
             },
             "ref": null,
             "rendered": "mockTitle",
