@@ -5,7 +5,7 @@ import ViewNote from '../ViewNote/ViewNote'
 export const NoteContainer = (props) => {
   const notes = props.notes.map(note => <ViewNote key={note.id} note={note}/>)
   return (
-    <div>
+    <div className='note-container'>
       {notes}
     </div>
   )

@@ -1,6 +1,7 @@
 @import './helpers/variables';
 @import './containers/App/App';
 @import './containers/EditNote/EditNote';
+@import './components/NoteContainer/NoteContainer';
 
 body {
   background: $background;
