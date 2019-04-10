@@ -12,7 +12,7 @@
 
 ## About the project
 
-### Trapper Keeper is a project based on the Google Keep application. It allows users to create new notes with titles and dynamic list items, and to view and edit the notes they've created. The goals of this project were to continue to improve on building client-side applications using react, redux, and react router; to practice creating a dynamic form UI; and to learn to build our own API using node and express. Trapper Keeper also implements a Jest/Enzyme test-suite and Sass styling.
+Trapper Keeper is a project based on the Google Keep application. It allows users to create new notes with titles and dynamic list items, and to view and edit the notes they've created. The goals of this project were to continue to improve on building client-side applications using react, redux, and react router; to practice creating a dynamic form UI; and to learn to build our own API using node and express. Trapper Keeper also implements a Jest/Enzyme test-suite and Sass styling.
 
 ## Tech Stack
 
