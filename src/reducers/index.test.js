@@ -1,5 +1,5 @@
 import { rootReducer } from './index'
-import { combineReducers, createStore } from 'redux'
+import { createStore } from 'redux'
 import { notes } from './notes'
 
 describe('rootReducer', () => {

@@ -44,6 +44,5 @@ describe('storeNote', () => {
     const result = actions.deleteNote(mockId)
 
     expect(result).toEqual(expected)
-
   })
 })

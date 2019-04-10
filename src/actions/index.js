@@ -17,8 +17,3 @@ export const storeUpdate = (updatedNote) => ({
   type: 'STORE_UPDATE',
   updatedNote
 })
-
-export const changeItem = (item) => ({
-  type: 'CHANGE_ITEM',
-  item
-})

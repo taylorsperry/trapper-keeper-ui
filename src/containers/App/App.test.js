@@ -1,13 +1,11 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
-import ReactDOM from 'react-dom'
-import {App} from './App'
+import { App } from './App'
 import { mapStateToProps, mapDispatchToProps } from './App'
 import { storeSavedNotes } from '../../actions'
 import { getNotes } from '../../helpers/apiCalls'
-import {mockBackendNotes, mockUpdatedNotes } from '../../helpers/mockData'
+import { mockUpdatedNotes } from '../../helpers/mockData'
 import { EditNote } from '../EditNote/EditNote'
-import { connect } from 'react-redux'
 import { MemoryRouter } from 'react-router'
 
 jest.mock('../../helpers/apiCalls')
