@@ -130,9 +130,8 @@ export class EditNote extends Component {
 
   addItem = (e) => {
     e.preventDefault()
-    this.state.items.push({value: '', id: Date.now(), completed: false})
     this.setState({
-      items: this.state.items
+      items: [...this.state.items, {value: '', id: Date.now(), completed: false}]
     })
   }
 
