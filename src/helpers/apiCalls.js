@@ -53,8 +53,8 @@ export const removeNote = async (id) => {
         'Content-Type': 'application/json'
       }
     })
-    const message = await response.json();
-    return message;
+    const message = await response.json()
+    return message
   } catch(error) {
     return error.message
   }
