@@ -1,6 +1,6 @@
 import EditItem from './EditItem'
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 describe('EditItem', () => {
   let wrapper

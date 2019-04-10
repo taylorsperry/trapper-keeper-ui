@@ -64,7 +64,7 @@ export class EditItem extends Component {
                     >
           </textarea>
         }
-        <button className='list-control delete' onClick={this.deleteItem}><i class="fas fa-minus-circle delete-item"></i></button>
+        <button className='list-control delete' onClick={this.deleteItem}><i className='fas fa-minus-circle delete-item'></i></button>
       </div>
     )
   }
