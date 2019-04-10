@@ -6,10 +6,9 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <EditItem
     completed={false}
     delete={[MockFunction]}
-    handleChange={[MockFunction]}
-    handleItem={[MockFunction]}
     id="123"
-    updateNoteItems={[MockFunction]}
+    moveCompleted={[MockFunction]}
+    updateItem={[MockFunction]}
     value="test"
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -29,7 +28,7 @@ ShallowWrapper {
       "children": Array [
         <input
           checked={false}
-          className="list-control"
+          className="list-control complete-item"
           name="completed"
           onChange={[Function]}
           type="checkbox"
@@ -57,7 +56,7 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "checked": false,
-          "className": "list-control",
+          "className": "list-control complete-item",
           "name": "completed",
           "onChange": [Function],
           "type": "checkbox",
@@ -105,7 +104,7 @@ ShallowWrapper {
         "children": Array [
           <input
             checked={false}
-            className="list-control"
+            className="list-control complete-item"
             name="completed"
             onChange={[Function]}
             type="checkbox"
@@ -133,7 +132,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "checked": false,
-            "className": "list-control",
+            "className": "list-control complete-item",
             "name": "completed",
             "onChange": [Function],
             "type": "checkbox",

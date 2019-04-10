@@ -28,7 +28,6 @@ export class EditItem extends Component {
   checkKey = (e) => {
     if(e.keyCode == 13) {
       e.preventDefault()
-      e.keyCode = 9
     }
   }
 
@@ -49,7 +48,7 @@ export class EditItem extends Component {
     return (
       <div className='list-container' >
         <input type='checkbox'
-                className='list-control'
+                className='list-control complete-item'
                 name='completed'
                 checked={this.state.completed}
                 onChange={this.toggleCompleted}
@@ -71,8 +70,8 @@ export class EditItem extends Component {
 }
 
 EditItem.propTypes = {
-  updateNoteItems: PropTypes.func.isRequired,
-  delete: PropTypes.func.isRequired,
+  updateNoteItems: PropTypes.func,
+  delete: PropTypes.func,
   item: PropTypes.object
 }
 

@@ -11,12 +11,19 @@ import './_App.scss'
 export class App extends Component {
   
   componentDidMount = async () => {
+    try {
       const allNotes = await getNotes()
       this.props.storeSavedNotes(allNotes)
+    } catch (error) {
+      return error.message
+    }
   }
 
   findNote = ({ match }) => {
     const foundNote = this.props.notes.find(note => note.id === match.params.id)
+    if(!foundNote) {
+      return '404 no note found!'
+    }
     return <EditNote {...foundNote} />
   }
   
@@ -52,7 +59,7 @@ export const mapDispatchToProps = (dispatch) => ({
 
 App.propTypes = {
   notes: PropTypes.array,
-  storeSavedNotes: PropTypes.func.isRequired
+  storeSavedNotes: PropTypes.func
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

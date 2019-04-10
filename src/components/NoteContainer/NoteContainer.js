@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ViewNote from '../../containers/ViewNote/ViewNote'
+import ViewNote from '../ViewNote/ViewNote'
 
 export const NoteContainer = (props) => {
-  // console.log(props.notes)
   const notes = props.notes.map(note => <ViewNote key={note.id} note={note}/>)
   return (
     <div>
@@ -13,7 +12,7 @@ export const NoteContainer = (props) => {
 }
 
 NoteContainer.propTypes = {
-  notes: PropTypes.array.isRequired
+  notes: PropTypes.array
 }
 
 export default NoteContainer

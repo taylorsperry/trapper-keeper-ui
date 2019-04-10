@@ -3,7 +3,47 @@
 exports[`App should match the snapshot 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <withRouter(Connect(App)) />,
+  Symbol(enzyme.__unrendered__): <App
+    match={
+      Object {
+        "isExact": true,
+        "params": Object {
+          "id": 1,
+        },
+        "path": "",
+        "url": "",
+      }
+    }
+    notes={
+      Array [
+        Object {
+          "id": 4,
+          "items": Array [
+            "item4a",
+            "item4b",
+            "item4c",
+          ],
+          "title": "New Title Four",
+        },
+        Object {
+          "id": 5,
+          "items": Array [
+            "item5a",
+            "item5b",
+          ],
+          "title": "Title Five",
+        },
+        Object {
+          "id": 6,
+          "items": Array [
+            "item6a",
+            "item6b",
+          ],
+          "title": "Title Six",
+        },
+      ]
+    }
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "checkPropTypes": [Function],
@@ -16,25 +56,431 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "host",
     "props": Object {
-      "children": [Function],
+      "children": Array [
+        <header
+          className="App-header"
+        >
+          <div
+            className="logo"
+          >
+            <i
+              className="fas fa-file"
+            />
+            <Link
+              to="/"
+            >
+              <h1>
+                Trapper Keeper
+              </h1>
+            </Link>
+          </div>
+          <Link
+            to="/new-note"
+          >
+            <button
+              className="new-note"
+            >
+              New Note
+            </button>
+          </Link>
+        </header>,
+        <Route
+          component={[Function]}
+          exact={true}
+          path="/"
+        />,
+        <Route
+          component={[Function]}
+          path="/new-note"
+        />,
+        <Route
+          path="/notes/:id"
+          render={[Function]}
+        />,
+      ],
+      "className": "App",
     },
     "ref": null,
-    "rendered": [Function],
-    "type": [Function],
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div
+              className="logo"
+            >
+              <i
+                className="fas fa-file"
+              />
+              <Link
+                to="/"
+              >
+                <h1>
+                  Trapper Keeper
+                </h1>
+              </Link>
+            </div>,
+            <Link
+              to="/new-note"
+            >
+              <button
+                className="new-note"
+              >
+                New Note
+              </button>
+            </Link>,
+          ],
+          "className": "App-header",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <i
+                  className="fas fa-file"
+                />,
+                <Link
+                  to="/"
+                >
+                  <h1>
+                    Trapper Keeper
+                  </h1>
+                </Link>,
+              ],
+              "className": "logo",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "className": "fas fa-file",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": "i",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <h1>
+                    Trapper Keeper
+                  </h1>,
+                  "to": "/",
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Trapper Keeper",
+                  },
+                  "ref": null,
+                  "rendered": "Trapper Keeper",
+                  "type": "h1",
+                },
+                "type": [Function],
+              },
+            ],
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <button
+                className="new-note"
+              >
+                New Note
+              </button>,
+              "to": "/new-note",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "New Note",
+                "className": "new-note",
+              },
+              "ref": null,
+              "rendered": "New Note",
+              "type": "button",
+            },
+            "type": [Function],
+          },
+        ],
+        "type": "header",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "component": [Function],
+          "exact": true,
+          "path": "/",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "component": [Function],
+          "path": "/new-note",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "path": "/notes/:id",
+          "render": [Function],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "host",
       "props": Object {
-        "children": [Function],
+        "children": Array [
+          <header
+            className="App-header"
+          >
+            <div
+              className="logo"
+            >
+              <i
+                className="fas fa-file"
+              />
+              <Link
+                to="/"
+              >
+                <h1>
+                  Trapper Keeper
+                </h1>
+              </Link>
+            </div>
+            <Link
+              to="/new-note"
+            >
+              <button
+                className="new-note"
+              >
+                New Note
+              </button>
+            </Link>
+          </header>,
+          <Route
+            component={[Function]}
+            exact={true}
+            path="/"
+          />,
+          <Route
+            component={[Function]}
+            path="/new-note"
+          />,
+          <Route
+            path="/notes/:id"
+            render={[Function]}
+          />,
+        ],
+        "className": "App",
       },
       "ref": null,
-      "rendered": [Function],
-      "type": [Function],
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <div
+                className="logo"
+              >
+                <i
+                  className="fas fa-file"
+                />
+                <Link
+                  to="/"
+                >
+                  <h1>
+                    Trapper Keeper
+                  </h1>
+                </Link>
+              </div>,
+              <Link
+                to="/new-note"
+              >
+                <button
+                  className="new-note"
+                >
+                  New Note
+                </button>
+              </Link>,
+            ],
+            "className": "App-header",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <i
+                    className="fas fa-file"
+                  />,
+                  <Link
+                    to="/"
+                  >
+                    <h1>
+                      Trapper Keeper
+                    </h1>
+                  </Link>,
+                ],
+                "className": "logo",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "className": "fas fa-file",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": "i",
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <h1>
+                      Trapper Keeper
+                    </h1>,
+                    "to": "/",
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "host",
+                    "props": Object {
+                      "children": "Trapper Keeper",
+                    },
+                    "ref": null,
+                    "rendered": "Trapper Keeper",
+                    "type": "h1",
+                  },
+                  "type": [Function],
+                },
+              ],
+              "type": "div",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <button
+                  className="new-note"
+                >
+                  New Note
+                </button>,
+                "to": "/new-note",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "New Note",
+                  "className": "new-note",
+                },
+                "ref": null,
+                "rendered": "New Note",
+                "type": "button",
+              },
+              "type": [Function],
+            },
+          ],
+          "type": "header",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "component": [Function],
+            "exact": true,
+            "path": "/",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "component": [Function],
+            "path": "/new-note",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "path": "/notes/:id",
+            "render": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": "div",
     },
   ],
   Symbol(enzyme.__options__): Object {
@@ -60,5 +506,6 @@ ShallowWrapper {
       },
     },
   },
+  Symbol(enzyme.__childContext__): null,
 }
 `;

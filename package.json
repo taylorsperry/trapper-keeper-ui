@@ -36,14 +36,14 @@
   "jest": {
     "collectCoverageFrom": [
       "src/containers/App/App.js",
-      "src/containers/ViewNote/ViewNote.js",
-      "src/containers/NewNote/NewNote.js",
-      "src/components/NewItem/NewItem.js",
+      "src/components/ViewNote/ViewNote.js",
+      "src/containers/EditNote/EditNote.js",
+      "src/components/EditItem/EditItem.js",
       "src/components/NoteContainer/NoteContainer.js",
+      "src/components/ViewItem/ViewItem.js",
       "src/helpers/apiCalls.js",
       "src/reducers/index.js",
       "src/reducers/notes.js",
-      "src/helpers/mockData.js",
       "src/actions/index.js"
     ]
   }

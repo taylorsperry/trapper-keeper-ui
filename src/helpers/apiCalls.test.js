@@ -1,5 +1,5 @@
 import {addNote, getNotes, updateNote} from './apiCalls'
-import {mockNote, mockNoteWithoutTitle, mockNoteWithoutItems, mockEmptyNote, mockAllNotes } from './mockData'
+import {mockNote, mockNoteWithoutTitle, mockNoteWithoutItems, mockEmptyNotes, mockAllNotes } from './mockData'
 
 describe('apiCalls', () => {
 
@@ -43,7 +43,7 @@ describe('apiCalls', () => {
         status: 422,
         json: () => Promise.resolve('Missing title and list')
       }))
-      const result = await addNote(mockEmptyNote)
+      const result = await addNote(mockEmptyNotes)
       expect(result).toEqual('Missing title and list')
     })
   })
@@ -85,6 +85,12 @@ describe('apiCalls', () => {
       ))
       const expected = await updateNote(mockNote)
       expect(expected).toEqual(updatedNote)
+    })
+
+    it('should return an error if missing title or list', async () => {
+      window.fetch = jest.fn().mockImplementation(() => Promise.reject(response.json()))
+        const expected = await updateNote(mockEmptyNotes)
+        expect(expected).toEqual('Missing title and list')
     })
   })
 
