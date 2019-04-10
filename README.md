@@ -29,7 +29,7 @@
 <img width="851" alt="Screen Shot 2019-04-09 at 10 52 57 PM" src="https://user-images.githubusercontent.com/43555476/55852450-52ec3580-5b1a-11e9-928c-3d7aef75fb83.png">
 
 ## Contributing Partners
-[Mason France](https://github.com/francepack)
-[Edgar Munoz](https://github.com/criteriamor)
+[Mason France](https://github.com/francepack),
+[Edgar Munoz](https://github.com/criteriamor),
 [Taylor Sperry](https://github.com/taylorsperry)
 
