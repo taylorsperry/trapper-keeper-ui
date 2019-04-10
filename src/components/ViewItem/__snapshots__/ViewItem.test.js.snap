@@ -25,9 +25,9 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <textarea
-        className="list-item"
+        className="list-item view-item"
       />,
-      "className": "list-container",
+      "className": "list-container view-item",
     },
     "ref": null,
     "rendered": Object {
@@ -35,7 +35,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "className": "list-item",
+        "className": "list-item view-item",
         "defaultValue": undefined,
       },
       "ref": null,
@@ -51,9 +51,9 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <textarea
-          className="list-item"
+          className="list-item view-item"
         />,
-        "className": "list-container",
+        "className": "list-container view-item",
       },
       "ref": null,
       "rendered": Object {
@@ -61,7 +61,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "host",
         "props": Object {
-          "className": "list-item",
+          "className": "list-item view-item",
           "defaultValue": undefined,
         },
         "ref": null,

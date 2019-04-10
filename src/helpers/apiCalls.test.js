@@ -1,4 +1,4 @@
-import {addNote, getNotes, updateNote} from './apiCalls'
+import {addNote, getNotes, updateNote, removeNote} from './apiCalls'
 import {mockNote, mockNoteWithoutTitle, mockNoteWithoutItems, mockEmptyNotes, mockAllNotes } from './mockData'
 
 describe('apiCalls', () => {
@@ -38,13 +38,12 @@ describe('apiCalls', () => {
     })
 
     it ('should return an error message if note has no title or items', async () => {
-      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-        ok: false, 
-        status: 422,
-        json: () => Promise.resolve('Missing title and list')
-      }))
-      const result = await addNote(mockEmptyNotes)
-      expect(result).toEqual('Missing title and list')
+      window.fetch = jest.fn(() => { return Promise.reject('No title!')})
+        try {
+          await addNote(mockNoteWithoutTitle)
+        } catch (error) {
+          expect(error).toEqual('No title!')
+        }
     })
   })
 
@@ -61,6 +60,15 @@ describe('apiCalls', () => {
       expect(window.fetch).toHaveBeenCalled()
       
       await expect(response).toEqual(mockAllNotes.notes)
+    })
+
+    it('should return an error if fetch fails', async () => {
+      window.fetch = jest.fn(() => { return Promise.reject('No notes found')})
+        try {
+          await getNotes()
+        } catch (error) {
+          expect(error).toEqual('No notes found')
+        }
     })
   })
 
@@ -98,11 +106,23 @@ describe('apiCalls', () => {
   })
 
   describe('removeNote', () => {
-    it('should call fetch ', () => {
-
+    it('should delete a selected item ', async () => {
+      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+        ok: true,
+        status: 202,
+        json: () => Promise.resolve('Your note is gone!')
+        }
+      ))
+      const expected = await removeNote(mockNote)
+      expect(expected).toEqual('Your note is gone!')
     })
-    it('should return an error message if note was unable to be deleted', () => {
-      
+    it('should return an error message if note was unable to be deleted', async () => {
+      window.fetch = jest.fn(() => { return Promise.reject('Error deleting note')})
+        try {
+          await removeNote(mockEmptyNotes)
+        } catch (error) {
+          expect(error).toEqual('Error deleting note')
+        }
     })
   })
 })

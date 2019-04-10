@@ -65,6 +65,7 @@ ShallowWrapper {
           }
         />,
       ],
+      "className": "note-container",
     },
     "ref": null,
     "rendered": Array [
@@ -139,6 +140,7 @@ ShallowWrapper {
             }
           />,
         ],
+        "className": "note-container",
       },
       "ref": null,
       "rendered": Array [
