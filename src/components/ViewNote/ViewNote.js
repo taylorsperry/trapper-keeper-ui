@@ -12,7 +12,7 @@ export const ViewNote = (props) => {
   let completeElements = completeItems.map(item => <ViewItem key={item.id} existingValue={item.value} complete='true'/>)
   
   return(
-    <form>
+    <form className='view-note'>
       <Link to={`/notes/${id}`}>
         <p className='title'>{title}</p>
         {incompleteElements}

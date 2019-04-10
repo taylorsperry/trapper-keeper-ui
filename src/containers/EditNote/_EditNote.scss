@@ -1,10 +1,10 @@
 @import '../../helpers/variables';
 
 form {
-  padding: 30px 10px;
+  padding: 30px 20px;
   border-radius: 10px;
-  border: 1px solid #e0e0e0;
-  width: 80%;
+  border: 1px solid $form-border;
+  width: 60%;
   box-shadow: 0 3px 5px rgba(0,0,0,0.20);
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@ form {
   font-size: 26px;
   margin-bottom: 10px;
   border: none;
-  color: #202124;
+  color: $type;
    &:focus {
      outline: none;
    }
@@ -25,7 +25,7 @@ form {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: solid #e0e0e0 1px;
+  border-bottom: solid $form-border 1px;
   margin-bottom: 10px;
 }
 
@@ -35,8 +35,8 @@ form {
   font-size: 18px;
   width: 100%;
   border: none;
-  color: #202124;
-  margin: 0px 10px;
+  color: $type;
+  margin: 10px 10px;
     &:focus {
       outline: none;
     } 
@@ -49,22 +49,19 @@ form {
 .list-control {
   height: 20px;
   width: 20px;
-  padding: 2px;
-  font-size: 7px;
-  border: solid #202124 1px;
-  border-radius: 2.5px;
+  padding: 2px 0px 25px 0px;
+  border: none;
   cursor: pointer;
 }
 
 .delete-item {
+  color: $hover;
+  font-size: 24px;
+  
   &:hover {
-    color: #DB4437;
-    border: solid #DB4437 1px;
+    color: $delete-hover;
+    transition: color .5s ease;
   }
-}
-
-.complete-item {
-  background-color: pink;
 }
 
 .note-controls {
@@ -75,7 +72,7 @@ form {
 .save-note,
 .delete-note {
   margin-left: 10px;
-  color: #fff;
+  color: $background;
   border: none;
   border-radius: 5px;
   height: 30px;
@@ -86,15 +83,17 @@ form {
 }
 
 .save-note {
-  background: #4285F4;
+  background: $save-btn;
     &:hover {
-      background-color: #4285f4d6;
+      background-color: $save-btn-hover;
+      transition: background-color .2s ease;
     }
 }
 
 .delete-note {
-  background-color: #DB4437;
+  background-color: $delete-btn;
     &:hover {
-      background-color: #db4437c9
+      background-color: $delete-hover;
+      transition: background-color .2s ease;
     }
 }
