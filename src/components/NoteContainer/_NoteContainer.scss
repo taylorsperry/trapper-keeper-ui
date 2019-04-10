@@ -1,0 +1,25 @@
+@import '../../helpers/variables';
+
+.note-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.view-note {
+  width: 25%;
+  height: 100%;
+  margin: 25px;
+  min-width: 325px;
+    &:hover {
+      cursor: pointer;
+      border: solid $logo 1px;
+      transition: border .5s ease;
+    }
+}
+
+.view-item {
+  &:hover {
+    cursor: pointer;
+  }
+}
