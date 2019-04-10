@@ -29,10 +29,10 @@ export class App extends Component {
   
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <div className='App'>
+        <header className='App-header'>
           <div className='logo'>
-            <i className="fas fa-file"></i>
+            <i className='fas fa-file'></i>
             <Link to='/'>
               <h1>Trapper Keeper</h1>
             </Link>
@@ -41,6 +41,7 @@ export class App extends Component {
             <button className='new-note'>New Note</button>
           </Link>
         </header>
+        {!this.props.notes.length && <p className='no-notes'>Create a note<i class='fas fa-arrow-up'></i></p>}
         <Route exact path='/' component= { () => <NoteContainer notes={this.props.notes} /> } />
         <Route path='/new-note' component={ () => <EditNote />} />
         <Route path='/notes/:id' render={this.findNote} />

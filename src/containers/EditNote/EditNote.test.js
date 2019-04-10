@@ -7,7 +7,7 @@ import * as actions from '../../actions'
 jest.mock('../../helpers/apiCalls')
 
 describe('EditNote', () => {
-let wrapper;
+let wrapper
 
   beforeEach(() => {
     Date.now = jest.fn().mockImplementation(() => 6)
@@ -77,8 +77,10 @@ let wrapper;
   })
 
   describe('updateState', () => {
+
     let mockState;
     let mockItem;
+
     beforeEach(() => {
       mockState = {
         id: 18,
@@ -118,7 +120,7 @@ let wrapper;
   })
 
   describe('handleSubmit', () => {
-    let mockState;
+    let mockState
 
     it('should call editNote() if the value of state.new is set to false', () => {
 
@@ -173,7 +175,7 @@ let wrapper;
   })
 
   describe('sendNote', () => {
-    let mockState;
+    let mockState
 
     beforeEach(() => {
       mockState = {
@@ -212,7 +214,7 @@ let wrapper;
   })
 
   describe('editNote', () => {
-    let mockState;
+    let mockState
 
     beforeEach(() => {
       
@@ -277,8 +279,8 @@ let wrapper;
   })
 
   describe('deleteItem', () => {
-    let mockState;
-    let props;
+    let mockState
+    let props
 
     beforeEach(() => {
       props = {
@@ -340,8 +342,8 @@ let wrapper;
 
   describe('handleDeleteNote', () => {
 
-    let mockState;
-    let props;
+    let mockState
+    let props
 
     beforeEach(() => {
       props = {
@@ -379,7 +381,7 @@ let wrapper;
 
   describe('mapDispatchToProps', () => {
     it('should delete a note ', () => {
-      let mockId = 1;
+      let mockId = 1
       let mockDispatch = jest.fn()
       const actionToDispatch = actions.deleteNote(mockId)
       const mappedProps = mapDispatchToProps(mockDispatch)
