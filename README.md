@@ -4,7 +4,17 @@
 
 ## Installation Steps
 
+Frontend: 
+
 ```git clone https://github.com/francepack/trapper-keeper-ui.git```
+
+```npm install```
+
+```npm start```
+
+Backend: 
+
+```git clone https://github.com/francepack/trapper-keeper-api.git```
 
 ```npm install```
 
