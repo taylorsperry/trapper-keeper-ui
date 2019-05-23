@@ -35,7 +35,6 @@ Trapper Keeper is a project based on the Google Keep application. It allows user
 
 ## Demo
 
-![2019-05-03 12 32 52](https://user-images.githubusercontent.com/43555476/57159090-5930a300-6da2-11e9-81c7-b791b6a8fbc4.gif)
 ![2019-05-03 12 34 12](https://user-images.githubusercontent.com/43555476/57159091-5930a300-6da2-11e9-9b2b-bde93eca9df2.gif)
 ![2019-05-03 12 40 02](https://user-images.githubusercontent.com/43555476/57159092-5930a300-6da2-11e9-8760-00166c8aa3e0.gif)
 ![2019-05-03 12 42 30](https://user-images.githubusercontent.com/43555476/57159093-5930a300-6da2-11e9-906e-e12cbf238d96.gif)
