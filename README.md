@@ -43,12 +43,8 @@ Trapper Keeper is a project based on the Google Keep application. It allows user
 ![2019-05-03 12 45 54](https://user-images.githubusercontent.com/43555476/57159095-5930a300-6da2-11e9-82f5-b75b9d39f8a2.gif)
 
 
-## Wireframe
-
-<img width="850" alt="Screen Shot 2019-04-09 at 10 52 26 PM" src="https://user-images.githubusercontent.com/43555476/55852446-4ff14500-5b1a-11e9-8cd2-786e84096f61.png">
-<img width="851" alt="Screen Shot 2019-04-09 at 10 52 57 PM" src="https://user-images.githubusercontent.com/43555476/55852450-52ec3580-5b1a-11e9-928c-3d7aef75fb83.png">
-
 ## Contributing Partners
+
 [Mason France](https://github.com/francepack),
 [Edgar Munoz](https://github.com/criteriamor),
 [Taylor Sperry](https://github.com/taylorsperry)
